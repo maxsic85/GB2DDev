@@ -7,7 +7,7 @@ using UnityEngine.Purchasing.Security;
 
 namespace Model.Shop
 {
-    internal class ShopTools
+    internal class ShopTools: IShop, IStoreListener
     {
         private IStoreController _controller;
         private IExtensionProvider _extensionProvider;
@@ -26,6 +26,7 @@ namespace Model.Shop
             {
                 builder.AddProduct(product.Id, product.CurrentProductType);
             }
+            UnityPurchasing.Initialize(this, builder);
         }
 
         public IReadOnlySubscriptionAction OnSuccessPurchase => _onSuccessPurchase;
@@ -65,7 +66,8 @@ namespace Model.Shop
                 validPurchase = false;
             }
 #endif
-            _onSuccessPurchase.Invoke();
+            if(validPurchase)
+                _onSuccessPurchase.Invoke();
             return PurchaseProcessingResult.Complete;
 
         }
