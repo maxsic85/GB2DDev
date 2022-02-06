@@ -1,31 +1,31 @@
-﻿using Model.Analytic;
-using Profile;
-using Tools.Ads;
+﻿using Profile;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MainController : BaseController
 {
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analyticsTools, IAdsShower ads)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, 
+        List<ItemConfig> itemsConfig)
     {
         _profilePlayer = profilePlayer;
-        _analyticsTools = analyticsTools;
-        _ads = ads;
         _placeForUi = placeForUi;
+        _itemsConfig = itemsConfig;
+
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
     private MainMenuController _mainMenuController;
     private GameController _gameController;
+    private InventoryController _inventoryController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
-    private readonly IAnalyticTools _analyticsTools;
-    private readonly IAdsShower _ads;
+    private readonly List<ItemConfig> _itemsConfig;
 
     protected override void OnDispose()
     {
-        _mainMenuController?.Dispose();
-        _gameController?.Dispose();
+        AllClear();
+
         _profilePlayer.CurrentState.UnSubscriptionOnChange(OnChangeGameState);
         base.OnDispose();
     }
@@ -35,17 +35,26 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _analyticsTools, _ads);
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose();
+                _inventoryController?.Dispose();
                 break;
             case GameState.Game:
+                _inventoryController = new InventoryController(_itemsConfig);
+                _inventoryController.ShowInventory();
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();
                 break;
             default:
-                _mainMenuController?.Dispose();
-                _gameController?.Dispose();
+                AllClear();
                 break;
         }
+    }
+
+    private void AllClear()
+    {
+        _inventoryController?.Dispose();
+        _mainMenuController?.Dispose();
+        _gameController?.Dispose();
     }
 }
