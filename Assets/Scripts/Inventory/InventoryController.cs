@@ -6,9 +6,9 @@ public class InventoryController : BaseController, IInventoryController
     private readonly IInventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
 
-    public InventoryController(List<ItemConfig> itemConfigs)
+    public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel)
     {
-        _inventoryModel = new InventoryModel();
+        _inventoryModel = inventoryModel;
         _inventoryView = new InventoryView();
         _itemsRepository = new ItemsRepository(itemConfigs);
     }

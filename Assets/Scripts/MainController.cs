@@ -5,22 +5,25 @@ using UnityEngine;
 public class MainController : BaseController
 {
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer, 
-        List<ItemConfig> itemsConfig)
+        List<ItemConfig> itemsConfig, IReadOnlyList<UpgradeItemConfig> upgradeItems)
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
         _itemsConfig = itemsConfig;
+        _upgradeItems = upgradeItems;
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
     private MainMenuController _mainMenuController;
+    private ShedController _shedController;
     private GameController _gameController;
     private InventoryController _inventoryController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly List<ItemConfig> _itemsConfig;
+    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
 
     protected override void OnDispose()
     {
@@ -36,11 +39,14 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar);
+                _shedController.Enter();
+                _shedController.Exit();
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
             case GameState.Game:
-                _inventoryController = new InventoryController(_itemsConfig);
+                _inventoryController = new InventoryController(_itemsConfig, new InventoryModel());
                 _inventoryController.ShowInventory();
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();

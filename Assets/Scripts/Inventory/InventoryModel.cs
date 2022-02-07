@@ -19,9 +19,6 @@ public class InventoryModel : IInventoryModel
 
     public void UnEquipItem(IItem item)
     {
-        if (!_items.Contains(item))
-            return;
-
         _items.Remove(item);
     }
 }
