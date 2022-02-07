@@ -2,5 +2,5 @@
 
 public interface IAbilityRepository
 {
-    public IReadOnlyDictionary<int, IAbility> AbilitiesMap { get; }
+    IReadOnlyDictionary<int, IAbility> AbilitiesMap { get; }
 }

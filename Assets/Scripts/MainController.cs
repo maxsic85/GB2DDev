@@ -5,12 +5,14 @@ using UnityEngine;
 public class MainController : BaseController
 {
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer, 
-        List<ItemConfig> itemsConfig, IReadOnlyList<UpgradeItemConfig> upgradeItems)
+        List<ItemConfig> itemsConfig, IReadOnlyList<UpgradeItemConfig> upgradeItems,
+        IReadOnlyList<AbilityItemConfig> abilityItems)
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
         _itemsConfig = itemsConfig;
         _upgradeItems = upgradeItems;
+        _abilityItems = abilityItems;
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -24,6 +26,7 @@ public class MainController : BaseController
     private readonly ProfilePlayer _profilePlayer;
     private readonly List<ItemConfig> _itemsConfig;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
+    private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
 
     protected override void OnDispose()
     {
@@ -46,9 +49,10 @@ public class MainController : BaseController
                 _inventoryController?.Dispose();
                 break;
             case GameState.Game:
-                _inventoryController = new InventoryController(_itemsConfig, new InventoryModel());
+                var inventoryModel = new InventoryModel();
+                _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                 _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer);
+                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel);
                 _mainMenuController?.Dispose();
                 break;
             default:
