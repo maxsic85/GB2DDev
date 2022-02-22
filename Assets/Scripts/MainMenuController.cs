@@ -14,9 +14,14 @@ public class MainMenuController : BaseController
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
         AddGameObjects(_view.gameObject);
-        _view.Init(StartGame);
+        _view.Init(StartGame, OpenRewards);
     }
-    
+
+    private void OpenRewards()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Rewards;
+    }
+
     private MainMenuView LoadView(Transform placeForUi)
     {
         return ResourceLoader.LoadAndInstantiateView<MainMenuView>(_viewPath, placeForUi);

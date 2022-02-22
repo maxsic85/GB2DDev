@@ -1,4 +1,5 @@
-﻿using Model.Analytic;
+﻿using JetBrains.Annotations;
+using Model.Analytic;
 using Profile;
 using Tools;
 using Tools.Ads;
@@ -9,6 +10,7 @@ public class ProfilePlayer
     {
         CurrentState = new SubscriptionProperty<GameState>();
         CurrentCar = new Car(speedCar);
+        RewardData = new RewardData();
         AdsShower = adsShower;
         AnalyticTools = analyticTools;
     }
@@ -20,5 +22,6 @@ public class ProfilePlayer
     public SubscriptionProperty<GameState> CurrentState { get; }
 
     public Car CurrentCar { get; }
-}
 
+    public RewardData RewardData { get; } 
+}

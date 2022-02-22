@@ -28,6 +28,8 @@ public class MainController : BaseController
     private ShedController _shedController;
     private GameController _gameController;
     private InventoryController _inventoryController;
+    private DailyRewardController _rewardController;
+    private FightController _fightController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly List<ItemConfig> _itemsConfig;
@@ -61,10 +63,39 @@ public class MainController : BaseController
                 _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);
                 _mainMenuController?.Dispose();
                 break;
+            case GameState.None:
+                break;
+            case GameState.Fight:
+                _inventoryController?.Dispose();
+                _gameController?.Dispose();
+                _fightController = CreateFightController();
+                break;
+            case GameState.Rewards:
+                _inventoryController?.Dispose();
+                _mainMenuController?.Dispose();
+                _rewardController = ConfigureRewardController();
+                break;
             default:
                 AllClear();
                 break;
         }
+    }
+
+    private FightController CreateFightController()
+    {
+        var fightView = ResourceLoader.LoadAndInstantiateView<FightWindowView>(new ResourcePath()
+            { PathResource = "Prefabs/FightView" }, _placeForUi);
+        return new FightController(fightView, _profilePlayer);
+    }
+
+    private DailyRewardController ConfigureRewardController()
+    {
+        var dailyRewardView = ResourceLoader.LoadAndInstantiateView<DailyRewardView>(new ResourcePath()
+            { PathResource = "Prefabs/DailyReward" }, _placeForUi);
+        var currencyView =
+            ResourceLoader.LoadAndInstantiateView<CurrencyWindow>(
+                new ResourcePath() { PathResource = "Prefabs/CurrencyWindow" }, _placeForUi);
+        return new DailyRewardController(dailyRewardView, currencyView, _profilePlayer);
     }
 
     private void AllClear()
