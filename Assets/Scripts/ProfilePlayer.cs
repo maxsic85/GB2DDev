@@ -1,16 +1,17 @@
-﻿using Profile;
+﻿using Profile.Analytic;
 using Tools;
-
-public class ProfilePlayer
+namespace Profile
 {
-    public ProfilePlayer(float speedCar)
+    public class ProfilePlayer
     {
-        CurrentState = new SubscriptionProperty<GameState>();
-        CurrentCar = new Car(speedCar);
+        public ProfilePlayer(float speedCar, IAnalyticTools analyticTools)
+        {
+            CurrentState = new SubscriptionProperty<GameState>();
+            CurrentCar = new Car(speedCar);
+            AnalyticTools = analyticTools;
+        }
+        public SubscriptionProperty<GameState> CurrentState { get; }
+        public Car CurrentCar { get; }
+        public IAnalyticTools AnalyticTools { get; }
     }
-
-    public SubscriptionProperty<GameState> CurrentState { get; }
-
-    public Car CurrentCar { get; }
 }
-

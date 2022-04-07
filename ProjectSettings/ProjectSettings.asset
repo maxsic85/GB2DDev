@@ -753,7 +753,14 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Analytics: 1
+    Build: 0
+    Collab: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -767,11 +774,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 08dfb37b-2ae3-47c4-8bb8-34e0f007f1de
+  cloudProjectId: fa2b54d6-8269-4332-96b9-166c910dc0e2
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: racingGame
-  organizationId: krebl
+  organizationId: maxsic
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0

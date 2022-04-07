@@ -1,4 +1,5 @@
-﻿using Profile;
+﻿using Profile.Analytic;
+using Profile;
 using UnityEngine;
 
 public class Root : MonoBehaviour
@@ -10,7 +11,7 @@ public class Root : MonoBehaviour
 
     private void Awake()
     {
-        var profilePlayer = new ProfilePlayer(15f);
+        var profilePlayer = new ProfilePlayer(15f, new  UnityAnalyticTools());
         profilePlayer.CurrentState.Value = GameState.Start;
         _mainController = new MainController(_placeForUi, profilePlayer);
     }

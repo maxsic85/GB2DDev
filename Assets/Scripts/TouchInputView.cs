@@ -15,6 +15,7 @@ namespace CarInput
         {
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(OnUpdate);
+            _speed = 0;
         }
 
         private void OnUpdate()
