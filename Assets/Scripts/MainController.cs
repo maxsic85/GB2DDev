@@ -1,11 +1,13 @@
 ﻿using Profile;
+using Tools;
 using UnityEngine;
 
 public class MainController : BaseController
 {
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer,IAdsShower adsShower)
     {
         _profilePlayer = profilePlayer;
+        _adsShower = adsShower;
         _placeForUi = placeForUi;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -15,6 +17,7 @@ public class MainController : BaseController
     private GameController _gameController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
+    private readonly IAdsShower _adsShower;
 
     protected override void OnDispose()
     {
@@ -29,7 +32,7 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

@@ -5,9 +5,9 @@ namespace Tools
 {
     internal class UnityAdsTools : MonoBehaviour, IAdsShower, /*IUnityAdsListener*/ IUnityAdsShowListener
     {
-        private string _gameId = "1457683";
+        private string _gameId = "4697777";
         private string _rewardPlace = "SpeedUpMaxUnit";
-        private string _interstitialPlace = "Interstitial_Android";
+        private string _interstitialPlace = "123";
         private Action _callbackSuccessShowVideo;
         private void Start()
         {
@@ -51,13 +51,15 @@ namespace Tools
 
         public void OnUnityAdsShowClick(string placementId)
         {
-            throw new NotImplementedException();
+          
         }
 
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
                 _callbackSuccessShowVideo?.Invoke();
+
+          
         }
     }
 }

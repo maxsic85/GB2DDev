@@ -1,7 +1,7 @@
 using System;
 namespace Tools
 {
-    internal interface IAdsShower
+    public interface IAdsShower
     {
         void ShowInterstitial();
         void ShowVideo(Action successShow);
