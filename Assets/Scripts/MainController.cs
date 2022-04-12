@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MainController : BaseController
 {
+    private MainMenuController _mainMenuController;
+    private GameController _gameController;
+    private readonly Transform _placeForUi;
+    private readonly ProfilePlayer _profilePlayer;
+    private readonly IAdsShower _adsShower;
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer,IAdsShower adsShower)
     {
         _profilePlayer = profilePlayer;
@@ -13,18 +18,13 @@ public class MainController : BaseController
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
-    private MainMenuController _mainMenuController;
-    private GameController _gameController;
-    private readonly Transform _placeForUi;
-    private readonly ProfilePlayer _profilePlayer;
-    private readonly IAdsShower _adsShower;
 
-    protected override void OnDispose()
+    protected override void OnChildDispose()
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
         _profilePlayer.CurrentState.UnSubscriptionOnChange(OnChangeGameState);
-        base.OnDispose();
+        base.OnChildDispose();
     }
 
     private void OnChangeGameState(GameState state)

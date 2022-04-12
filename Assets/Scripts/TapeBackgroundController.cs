@@ -24,12 +24,12 @@ public class TapeBackgroundController : BaseController
     private readonly IReadOnlySubscriptionProperty<float> _leftMove;
     private readonly IReadOnlySubscriptionProperty<float> _rightMove;
 
-    protected override void OnDispose()
+    protected override void OnChildDispose()
     {
         _leftMove.UnSubscriptionOnChange(Move);
         _rightMove.UnSubscriptionOnChange(Move);
         
-        base.OnDispose();
+        base.OnChildDispose();
     }
 
     private TapeBackgroundView LoadView()

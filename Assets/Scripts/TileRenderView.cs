@@ -20,6 +20,11 @@ namespace CarInput
 
         private void OnUpdate()
         {
+            CreateTileRender();
+        }
+
+        private void CreateTileRender()
+        {
             if (Input.touchCount > 0)
             {
                 var touch = Input.GetTouch(0);

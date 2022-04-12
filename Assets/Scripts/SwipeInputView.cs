@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CarInput
 {
-    public class SwipeView : BaseInputView
+    public class SwipeInputView : BaseInputView
     {
         private const float _swipeAcceleration = 0.1f;
         private const float _slowUpPerSecond = 0.5f;

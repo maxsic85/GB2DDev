@@ -16,6 +16,7 @@ public class BaseController : IDisposable
         
         _isDisposed = true;
             
+        OnChildDispose();
         foreach (var baseController in _baseControllers)
             baseController?.Dispose();
                 
@@ -26,7 +27,6 @@ public class BaseController : IDisposable
                 
         _gameObjects.Clear();
 
-        OnDispose();
     }
 
     protected void AddController(BaseController baseController)
@@ -39,7 +39,7 @@ public class BaseController : IDisposable
         _gameObjects.Add(gameObject);
     }
 
-    protected virtual void OnDispose()
+    protected virtual void OnChildDispose()
     {
     }
 }
