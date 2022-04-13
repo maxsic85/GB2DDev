@@ -1,17 +1,21 @@
 ﻿using Profile;
+using System.Collections.Generic;
 using Tools;
 using UnityEngine;
 
 public class MainController : BaseController
 {
     private MainMenuController _mainMenuController;
+    private ShedController _shedController;
     private GameController _gameController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer,IAdsShower adsShower)
+    private readonly List<UpgradeItemConfig> _upgradeItemConfigs;
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer,IAdsShower adsShower, List<UpgradeItemConfig> upgradeItemConfigs)
     {
         _profilePlayer = profilePlayer;
+        _upgradeItemConfigs = upgradeItemConfigs;
         _adsShower = adsShower;
         _placeForUi = placeForUi;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
@@ -33,6 +37,7 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower);
+                _shedController = new ShedController(_upgradeItemConfigs,_profilePlayer.CurrentCar,_placeForUi);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

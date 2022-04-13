@@ -2,6 +2,7 @@
 using Profile;
 using UnityEngine;
 using Tools;
+using System.Collections.Generic;
 
 public class Root : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class Root : MonoBehaviour
     [SerializeField]
     private UnityAdsTools _unityAdsTool;
     private MainController _mainController;
-
+   [SerializeField] private  List<UpgradeItemConfig> _upgradeItemConfigs;
     private void Awake()
     {
         var profilePlayer = new ProfilePlayer(15f, new  UnityAnalyticTools());
         profilePlayer.CurrentState.Value = GameState.Start;
-        _mainController = new MainController(_placeForUi, profilePlayer, _unityAdsTool);
+        _mainController = new MainController(_placeForUi, profilePlayer, _unityAdsTool, _upgradeItemConfigs);
     }
 
     protected void OnDestroy()

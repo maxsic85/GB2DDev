@@ -32,7 +32,7 @@ public class ItemsRepository : BaseController, IItemsRepository
         return new Item
         {
             Id = config.id,
-            Info = new ItemInfo { Title = config.title }
+            Info = new ItemInfo { Title = config.title, Sprite=config.image }
         };
     }
 #endregion

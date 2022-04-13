@@ -36,6 +36,8 @@ public class MainMenuController : BaseController
         return objectView.GetComponent<MainMenuView>();
     }
 
+ 
+
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
