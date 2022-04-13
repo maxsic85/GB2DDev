@@ -19,8 +19,8 @@ public class InventoryView : MonoBehaviour, IInventoryView
         foreach (var item in _itemInfoCollection)
         {
             _itemsObjectsView.Add(GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), transform, false));
-            _itemsObjectsView.FirstOrDefault().transform.GetChild(0).GetComponent<Text>().text = item.Info.Title;
-            _itemsObjectsView.FirstOrDefault().transform.GetChild(1).GetComponent<Image>().sprite = item.Info.Sprite;
+            _itemsObjectsView.LastOrDefault().transform.GetChild(0).GetComponent<Text>().text = item.Info.Title;
+            _itemsObjectsView.LastOrDefault().transform.GetChild(1).GetComponent<Image>().sprite = item.Info.Sprite;
 
             Debug.Log($"item {item}");
         }
