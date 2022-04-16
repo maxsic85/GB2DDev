@@ -18,6 +18,7 @@ public class InventoryController : BaseController, IInventoryController
         = itemsRepository ?? throw new ArgumentNullException(nameof(itemsRepository));
         _inventoryWindowView = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
         _inventoryWindowView.Init(_itemsRepository.Items.Values.ToList());
+       
 
     }
 

@@ -14,7 +14,7 @@ public class Root : MonoBehaviour
    [SerializeField] private  List<UpgradeItemConfig> _upgradeItemConfigs;
     private void Awake()
     {
-        var profilePlayer = new ProfilePlayer(15f, new  UnityAnalyticTools());
+        var profilePlayer = new ProfilePlayer(3f, new  UnityAnalyticTools());
         profilePlayer.CurrentState.Value = GameState.Start;
         _mainController = new MainController(_placeForUi, profilePlayer, _unityAdsTool, _upgradeItemConfigs);
     }

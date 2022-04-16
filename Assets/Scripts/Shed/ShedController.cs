@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ShedController : BaseController,IShedController
+public class ShedController : BaseController, IShedController
 {
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Inventory" };
     private readonly Car _car;
@@ -18,7 +18,7 @@ public class ShedController : BaseController,IShedController
     public ShedController(
     [NotNull] List<UpgradeItemConfig> upgradeItemConfigs,
     [NotNull] Car car,
-    [NotNull]Transform placeForUi)
+    [NotNull] Transform placeForUi)
     {
         _inventoryView = LoadView(placeForUi);
         if (upgradeItemConfigs == null) throw new
@@ -33,10 +33,10 @@ public class ShedController : BaseController,IShedController
         AddController(_upgradeItemsRepository);
         _inventoryModel = new InventoryModel();
         _inventoryController
-        = new InventoryController(_inventoryModel, _upgradeItemsRepository,_inventoryView);
+        = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);
         Enter();
-      //  _inventoryView.Display(_upgradeItemsRepository.Items.Values.ToList());
+        //  _inventoryView.Display(_upgradeItemsRepository.Items.Values.ToList());
     }
 
     public void Enter()
@@ -46,9 +46,28 @@ public class ShedController : BaseController,IShedController
 
     public void Exit()
     {
+        Debug.Log($"Exit: car has speed : {_car.Speed}");
+        UpgradeCarWithEquippedItems(
+  _car, _upgradeItemsRepository.Items.Values.ToList(), _upgradeHandlersRepository.UpgradeItems);
+        Debug.Log($"Exit: car has speed : {_car.Speed}");
         _inventoryController.HideInventory();
-      
 
+    }
+
+
+    private void UpgradeCarWithEquippedItems(
+                                            IUpgradableCar upgradableCar,
+                                            IReadOnlyList<IItem> equippedItems,
+                                            IReadOnlyDictionary<int,
+                                            IUpgradeCarHandler> upgradeHandlers)
+    {
+        foreach (var equippedItem in equippedItems)
+        {
+            if (upgradeHandlers.TryGetValue(equippedItem.Id, out var handler))
+            {
+                handler.Upgrade(upgradableCar);
+            }
+        }
     }
 
     public IInventoryView LoadView(Transform placeForUi)
