@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System;
+using System.Linq;
 
 public class InventoryController : BaseController, IInventoryController
 {
@@ -16,15 +17,17 @@ public class InventoryController : BaseController, IInventoryController
         _itemsRepository
         = itemsRepository ?? throw new ArgumentNullException(nameof(itemsRepository));
         _inventoryWindowView = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
+        _inventoryWindowView.Init(_itemsRepository.Items.Values.ToList());
+
     }
 
     public void HideInventory()
     {
-       
+        _inventoryWindowView.Display();
     }
 
     public void ShowInventory(Action callback)
     {
-      
+        _inventoryWindowView.Display();
     }
 }

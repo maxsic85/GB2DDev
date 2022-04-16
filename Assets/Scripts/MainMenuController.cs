@@ -19,7 +19,7 @@ public class MainMenuController : BaseController
         _adsShower = adsShower;
         _view = LoadView(placeForUi);
         _tileView = LoadTileRender(placeForUi);
-        _view.Init(StartGame);
+        _view.Init(StartGame,GoToTheShed);
         _tileView.Init(StartGame);
     }
     private TileRenderView LoadTileRender(Transform placeForUi)
@@ -36,14 +36,17 @@ public class MainMenuController : BaseController
         return objectView.GetComponent<MainMenuView>();
     }
 
- 
-
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
 
+    }
+
+    private void GoToTheShed()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Shed;
     }
 }
 

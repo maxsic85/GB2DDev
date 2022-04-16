@@ -31,7 +31,6 @@ public class TapeBackgroundController : BaseController
         
         base.OnChildDispose();
     }
-
     private TapeBackgroundView LoadView()
     {
         var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));

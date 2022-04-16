@@ -21,8 +21,6 @@ public class MainController : BaseController
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
-
-
     protected override void OnChildDispose()
     {
         _mainMenuController?.Dispose();
@@ -37,12 +35,20 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower);
-                _shedController = new ShedController(_upgradeItemConfigs,_profilePlayer.CurrentCar,_placeForUi);
+              
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();
+                _shedController?.Dispose();
+                break;
+            case GameState.Shed: if (_shedController == null)
+                    _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi);
+                else _shedController.Exit();
+
+
+
                 break;
             default:
                 _mainMenuController?.Dispose();

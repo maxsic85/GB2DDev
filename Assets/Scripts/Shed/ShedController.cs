@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ShedController : BaseController
+public class ShedController : BaseController,IShedController
 {
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Inventory" };
     private readonly Car _car;
@@ -35,15 +35,36 @@ public class ShedController : BaseController
         _inventoryController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository,_inventoryView);
         AddController(_inventoryController);
-        _inventoryView.Display(_upgradeItemsRepository.Items.Values.ToList());
+        Enter();
+      //  _inventoryView.Display(_upgradeItemsRepository.Items.Values.ToList());
+    }
+
+    public void Enter()
+    {
+        _inventoryController.ShowInventory(Exit);
+    }
+
+    public void Exit()
+    {
+        _inventoryController.HideInventory();
+      
+
     }
 
     public IInventoryView LoadView(Transform placeForUi)
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
         AddGameObjects(objectView);
-
         return objectView.GetComponent<InventoryView>();
     }
+
+    protected override void OnChildDispose()
+    {
+        base.OnChildDispose();
+    }
+
     #endregion
+
+
+
 }

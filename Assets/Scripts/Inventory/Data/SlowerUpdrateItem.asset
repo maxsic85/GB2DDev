@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595592aa502bd7d4e88d667f1cb35e15, type: 3}
   m_Name: SlowerUpdrateItem
   m_EditorClassIdentifier: 
-  itemConfig: {fileID: 0}
-  type: 0
-  value: 0
+  itemConfig: {fileID: 11400000, guid: ac310844ae7429e408ef978a6291240e, type: 2}
+  type: 1
+  value: -50
