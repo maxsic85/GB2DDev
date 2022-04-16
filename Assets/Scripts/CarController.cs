@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CarController : BaseController
+public class CarController : BaseController,IAbilityActivator
 {
     private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/Car"};
     private readonly CarView _carView;
@@ -8,6 +8,7 @@ public class CarController : BaseController
     public CarController()
     {
         _carView = LoadView();
+   
     }
 
     private CarView LoadView()
@@ -22,5 +23,7 @@ public class CarController : BaseController
     {
         return _carView.gameObject;
     }
+
+  
 }
 
