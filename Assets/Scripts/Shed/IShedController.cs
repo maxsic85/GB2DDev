@@ -1,5 +1,5 @@
 public interface IShedController
 {
-    void Enter();
-    void Exit();
+    void EnterToShed();
+    void ExitFromShed();
 }

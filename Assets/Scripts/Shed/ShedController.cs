@@ -15,10 +15,8 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private readonly IInventoryView _inventoryView;
     #region Life cycle
-    public ShedController(
-    [NotNull] List<UpgradeItemConfig> upgradeItemConfigs,
-    [NotNull] Car car,
-    [NotNull] Transform placeForUi)
+    public ShedController([NotNull] List<UpgradeItemConfig> upgradeItemConfigs,[NotNull] Car car,
+                          [NotNull] Transform placeForUi)
     {
         _inventoryView = LoadView(placeForUi);
         if (upgradeItemConfigs == null) throw new
@@ -35,26 +33,20 @@ public class ShedController : BaseController, IShedController
         _inventoryController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);
-        Enter();
-        //  _inventoryView.Display(_upgradeItemsRepository.Items.Values.ToList());
+        EnterToShed();
     }
-
-    public void Enter()
+    public void EnterToShed()
     {
-        _inventoryController.ShowInventory(Exit);
+        _inventoryController.ShowInventory(ExitFromShed);
     }
-
-    public void Exit()
+    public void ExitFromShed()
     {
         Debug.Log($"Exit: car has speed : {_car.Speed}");
-        UpgradeCarWithEquippedItems(
-  _car, _upgradeItemsRepository.Items.Values.ToList(), _upgradeHandlersRepository.UpgradeItems);
+        var equipItems = _upgradeItemsRepository.Items.Values.ToList();
+        UpgradeCarWithEquippedItems(_car, equipItems, _upgradeHandlersRepository.UpgradeItems);
         Debug.Log($"Exit: car has speed : {_car.Speed}");
         _inventoryController.HideInventory();
-
     }
-
-
     private void UpgradeCarWithEquippedItems(
                                             IUpgradableCar upgradableCar,
                                             IReadOnlyList<IItem> equippedItems,
@@ -69,7 +61,6 @@ public class ShedController : BaseController, IShedController
             }
         }
     }
-
     public IInventoryView LoadView(Transform placeForUi)
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
@@ -81,9 +72,5 @@ public class ShedController : BaseController, IShedController
     {
         base.OnChildDispose();
     }
-
     #endregion
-
-
-
 }

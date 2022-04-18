@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public interface IAbilityRepository
+public class AbilityRepository
 {
     IReadOnlyDictionary<int, IAbility> AbilityMapByItemId { get; }
 }

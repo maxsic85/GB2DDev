@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878229f40f072124a8870f7e0c563ffa, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  itemConfig: {fileID: 0}
-  view: {fileID: 0}
-  type: 0
-  value: 0
+  itemConfig: {fileID: 11400000, guid: ae65556b650caff40a3e7a4c7cf74730, type: 2}
+  view: {fileID: 4053592497838757858, guid: 44eb27282cac35e4bbc56d3fd9cc795e, type: 3}
+  type: 1
+  value: 3
