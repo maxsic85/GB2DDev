@@ -8,13 +8,10 @@ public class GunAbility : IAbility
     private readonly Rigidbody2D _viewPrefab;
     private readonly float _projectileSpeed;
     public GunAbility(
-    [NotNull] string viewPath,
+    [NotNull] GameObject viewPrefab,
     float projectileSpeed)
     {
-        _viewPrefab = ResourceLoader.LoadRigitBody2D(new ResourcePath
-        {
-            PathResource = viewPath
-        });
+        _viewPrefab = viewPrefab.GetComponent<Rigidbody2D>();
         if (_viewPrefab == null) throw new InvalidOperationException($"{nameof(GunAbility)} viewrequires { nameof(Rigidbody2D) } component!");
     _projectileSpeed = projectileSpeed;
     }
