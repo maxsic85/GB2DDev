@@ -18,8 +18,8 @@ public class AbilityRepository : BaseController, IRepository<int, IAbility>
         switch (abilityItemConfig.type)
         {
             case AbilityType.None: return AbilityStub.Default;
-            case AbilityType.Gun:
-                return AbilityStub.Default;
+            case AbilityType.Gun: return new GunAbility(abilityItemConfig.view, abilityItemConfig.value);
+              
             default:
                 return AbilityStub.Default;
 

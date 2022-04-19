@@ -16,7 +16,7 @@ public class ShedController : BaseController, IShedController
     private readonly IInventoryView _inventoryView;
     #region Life cycle
     public ShedController([NotNull] List<UpgradeItemConfig> upgradeItemConfigs,[NotNull] Car car,
-                          [NotNull] Transform placeForUi)
+                          [NotNull] Transform placeForUi, InventoryModel inventoryModel)
     {
         _inventoryView = LoadView(placeForUi);
         if (upgradeItemConfigs == null) throw new
@@ -29,7 +29,7 @@ public class ShedController : BaseController, IShedController
         = new ItemsRepository(upgradeItemConfigs.Select(value =>
         value.itemConfig).ToList());
         AddController(_upgradeItemsRepository);
-        _inventoryModel = new InventoryModel();
+        _inventoryModel = inventoryModel;
         _inventoryController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);

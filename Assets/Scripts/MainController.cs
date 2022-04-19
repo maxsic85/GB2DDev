@@ -8,6 +8,7 @@ public class MainController : BaseController
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
+    private InventoryModel _inventoryModel;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
@@ -23,6 +24,7 @@ public class MainController : BaseController
         _placeForUi = placeForUi;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+        _inventoryModel = new InventoryModel();
     }
     private void OnChangeGameState(GameState state)
     {
@@ -34,12 +36,12 @@ public class MainController : BaseController
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
-                _gameController = new GameController(_profilePlayer);
+                _gameController = new GameController(_profilePlayer,_abilityItemConfigs, _inventoryModel,_placeForUi);
                 _mainMenuController?.Dispose();
                 _shedController?.Dispose();
                 break;
             case GameState.Shed: if (_shedController == null)
-                    _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi);
+                    _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi,_inventoryModel);
                 else _shedController.EnterToShed();
                 break;
             default:
