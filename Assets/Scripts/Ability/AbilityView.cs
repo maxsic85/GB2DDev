@@ -12,12 +12,12 @@ public class AbilityView : MonoBehaviour,IAbilityCollectionView
 
     public void Show()
     {
-    
+        _canvasGroup.alpha = 1;
     }
 
     public void Hide()
-    { 
-    
+    {
+        _canvasGroup.alpha = 0;
     }
 
     public event EventHandler<IItem> UseRequested;
@@ -28,6 +28,7 @@ public class AbilityView : MonoBehaviour,IAbilityCollectionView
         {
             var view = Instantiate<AbilityItemView>(_itemView, _layout);
             view.Init(abilka);
+            _abilityItemViews.Add(view);
             view.OnClick += OnRequested;
 
         }
