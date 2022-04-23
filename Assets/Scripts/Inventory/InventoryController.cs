@@ -32,24 +32,24 @@ public class InventoryController : BaseController, IInventoryController
         _inventoryWindowView.Display();
     }
 
-    private void SetupView(IInventoryView inventoryView)
-    {
-        // здесь могут быть дополнительные настройки
-        _inventoryWindowView.Selected += OnItemSelected;
-        _inventoryWindowView.Deselected += OnItemDeselected;
-    }
-    private void CleanupView()
-    {
-        // здесь могут быть дополнительные зачистки
-        _inventoryWindowView.Selected -= OnItemSelected;
-        _inventoryWindowView.Selected -= OnItemDeselected;
-    }
-    private void OnItemSelected(object sender, IItem item)
-    {
-        _inventoryModel.EquipItem(item);
-    }
-    private void OnItemDeselected(object sender, IItem item)
-    {
-        _inventoryModel.UnequipItem(item);
-    }
+    //private void SetupView(IInventoryView inventoryView)
+    //{
+    //    // здесь могут быть дополнительные настройки
+    //    _inventoryWindowView.Selected += OnItemSelected;
+    //    _inventoryWindowView.Deselected += OnItemDeselected;
+    //}
+    //private void CleanupView()
+    //{
+    //    // здесь могут быть дополнительные зачистки
+    //    _inventoryWindowView.Selected -= OnItemSelected;
+    //    _inventoryWindowView.Selected -= OnItemDeselected;
+    //}
+    //private void OnItemSelected(object sender, IItem item)
+    //{
+    //    _inventoryModel.EquipItem(item);
+    //}
+    //private void OnItemDeselected(object sender, IItem item)
+    //{
+    //    _inventoryModel.UnequipItem(item);
+    //}
 }

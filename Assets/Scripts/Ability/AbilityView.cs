@@ -8,7 +8,7 @@ public class AbilityView : MonoBehaviour,IAbilityCollectionView
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Transform _layout;
     [SerializeField] private AbilityItemView _itemView;
-    private List<AbilityItemView> _abilityItemViews=new List<AbilityItemView>(4);
+    public List<AbilityItemView> _abilityItemViews=new List<AbilityItemView>(4);
 
     public void Show()
     {

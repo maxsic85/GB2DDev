@@ -5,4 +5,5 @@ public interface IAbilityCollectionView
 {
     event EventHandler<IItem> UseRequested;
     void Display(IReadOnlyList<IItem> abilityItems);
+    void Show();
 }

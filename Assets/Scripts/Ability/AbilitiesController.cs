@@ -23,12 +23,29 @@ public class AbilitiesController : BaseController
         ArgumentNullException(nameof(abilityCollectionView));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
         _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+        SetupView(_abilityCollectionView);
     }
 
     private void OnAbilityUseRequested(object sender, IItem e)
     {
         if (_abilityRepository.Content.TryGetValue(e.Id, out var ability))
             ability.Apply(_abilityActivator);
+    }
+
+    private void SetupView(IAbilityCollectionView view)
+    {
+        // здесь могут быть дополнительные настройки
+        view.UseRequested += OnAbilityUseRequested;
+    }
+    private void CleanupView(IAbilityCollectionView view)
+    {
+        // здесь могут быть дополнительные зачистки
+        view.UseRequested -= OnAbilityUseRequested;
+    }
+    public void ShowAbilities()
+    {
+        _abilityCollectionView.Show();
+        _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
     }
 
 }
