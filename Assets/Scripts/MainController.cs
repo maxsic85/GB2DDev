@@ -36,6 +36,15 @@ public class MainController : BaseController
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
+                var abilityRepository = new AbilityRepository(_abilityItemConfigs);
+                var objView = Object.Instantiate(ResourceLoader.LoadPrefab(new ResourcePath() { PathResource = "Prefabs/AbilityView" }), _placeForUi).GetComponent<IAbilityCollectionView>();
+                var carController = new CarController();
+                AddController(carController);
+
+
+                var abilityController = new AbilitiesController(carController, _inventoryModel, abilityRepository, objView,_shedController._upgradeItemsRepository);
+                abilityController.ShowAbilities();
+                AddController(abilityController);
                 _gameController = new GameController(_profilePlayer,_abilityItemConfigs, _inventoryModel,_placeForUi);
                 _mainMenuController?.Dispose();
                 _shedController?.Dispose();

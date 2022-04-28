@@ -18,16 +18,9 @@ public class GameController : BaseController
         var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar, gameInputType);
         AddController(inputGameController);
             
-        var carController = new CarController();
-        AddController(carController);
+      
 
-        var abilityRepository = new AbilityRepository(configs);
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(new ResourcePath() {PathResource= "Prefabs/AbilityView" }),root).GetComponent<IAbilityCollectionView>();
-        
-    
-
-        var abilityController = new AbilitiesController(carController, model, abilityRepository, objView);
-        AddController(abilityController);
+      
 
     
 

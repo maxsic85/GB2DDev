@@ -10,7 +10,7 @@ public class ShedController : BaseController, IShedController
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Inventory" };
     private readonly Car _car;
     private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
-    private readonly ItemsRepository _upgradeItemsRepository;
+    public readonly ItemsRepository _upgradeItemsRepository;
     private readonly InventoryModel _inventoryModel;
     private readonly InventoryController _inventoryController;
     private readonly IInventoryView _inventoryView;

@@ -4,14 +4,16 @@ using System;
 public class AbilitiesController : BaseController
 {
     private readonly IInventoryModel _inventoryModel;
-    private readonly IRepository<int,IAbility> _abilityRepository;
+    private readonly IRepository<int, IAbility> _abilityRepository;
+    private readonly ItemsRepository _items;
     private readonly IAbilityCollectionView _abilityCollectionView;
     private readonly IAbilityActivator _abilityActivator;
     public AbilitiesController(
     [NotNull] IAbilityActivator abilityActivator,
     [NotNull] IInventoryModel inventoryModel,
     [NotNull] IRepository<int, IAbility> abilityRepository,
-    [NotNull] IAbilityCollectionView abilityCollectionView)
+    [NotNull] IAbilityCollectionView abilityCollectionView,
+    [NotNull] ItemsRepository itemsRepository)
     {
         _abilityActivator = abilityActivator ?? throw new
         ArgumentNullException(nameof(abilityActivator));
@@ -22,8 +24,9 @@ public class AbilitiesController : BaseController
         _abilityCollectionView = abilityCollectionView ?? throw new
         ArgumentNullException(nameof(abilityCollectionView));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
-        _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+        //_abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
         SetupView(_abilityCollectionView);
+        ShowAbilities();
     }
 
     private void OnAbilityUseRequested(object sender, IItem e)
@@ -44,8 +47,14 @@ public class AbilitiesController : BaseController
     }
     public void ShowAbilities()
     {
-        _abilityCollectionView.Show();
+        foreach (var item in _items.Items.Values)
+        {
+            _inventoryModel.EquipItem(item);
+        }
+
+
         _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+        _abilityCollectionView.Show();
     }
 
 }

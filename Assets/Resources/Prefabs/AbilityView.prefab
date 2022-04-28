@@ -998,6 +998,11 @@ MonoBehaviour:
   _canvasGroup: {fileID: 5114268977179837926}
   _layout: {fileID: 7959920813182249423}
   _itemView: {fileID: 1762920231548324741}
+  _abilityItemViews:
+  - {fileID: 1762920231548324741}
+  - {fileID: 4980014349245990781}
+  - {fileID: 1436314731572722502}
+  - {fileID: 2938822423222445995}
 --- !u!225 &5114268977179837926
 CanvasGroup:
   m_ObjectHideFlags: 0
