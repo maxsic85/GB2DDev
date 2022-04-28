@@ -34,7 +34,8 @@ class Enemy : IEnemy
         get
         {
             var kHealth = _healthPlayer > MaxHealthPlayer ? 100 : 5;
-            var power = (int)(_moneyPlayer / KCoins + kHealth + _powerPlayer / KPower);
+           
+            var power = (int)(_moneyPlayer /  + kHealth + _powerPlayer / KPower);
             return power;
         }
     }

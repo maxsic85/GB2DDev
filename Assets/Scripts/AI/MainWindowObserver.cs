@@ -12,6 +12,8 @@ public class MainWindowObserver : MonoBehaviour
     [SerializeField]
     private TMP_Text _countPowerEnemyText;
     [SerializeField]
+    private TMP_Text _banditizmPlayerText;
+    [SerializeField]
     private Button _addCoinsButton;
     [SerializeField]
     private Button _minusCoinsButton;
@@ -25,6 +27,8 @@ public class MainWindowObserver : MonoBehaviour
     private Button _minusPowerButton;
     [SerializeField]
     private Button _fightButton;
+    [SerializeField]
+    private Button _passButton;
     private int _allCountMoneyPlayer;
     private int _allCountHealthPlayer;
     private int _allCountPowerPlayer;
