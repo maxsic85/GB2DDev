@@ -3350,7 +3350,7 @@ MonoBehaviour:
   _countHealthText: {fileID: 141575512}
   _countPowerText: {fileID: 152903261}
   _countPowerEnemyText: {fileID: 257354792}
-  _banditizmPlayerText: {fileID: 0}
+  _banditizmPlayerText: {fileID: 1608367689}
   _addCoinsButton: {fileID: 1205835355}
   _minusCoinsButton: {fileID: 1701683514}
   _addHealthButton: {fileID: 852221646}
