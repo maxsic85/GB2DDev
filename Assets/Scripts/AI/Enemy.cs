@@ -9,6 +9,8 @@ class Enemy : IEnemy
     private int _moneyPlayer;
     private int _healthPlayer;
     private int _powerPlayer;
+    private int _banditizmPlayer;
+
     public Enemy(string name)
     {
         _name = name;
@@ -25,6 +27,9 @@ class Enemy : IEnemy
                 break;
             case DataType.Power:
                 _powerPlayer = dataPlayer.Power;
+                break;
+            case DataType.Banditizm:
+                _banditizmPlayer = dataPlayer.Banditizm;
                 break;
         }
         Debug.Log($"Notified {_name} change to {dataPlayer}");

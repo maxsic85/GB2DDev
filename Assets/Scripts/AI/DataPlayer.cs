@@ -6,6 +6,8 @@ abstract class DataPlayer
     private int _countMoney;
     private int _countHealth;
     private int _countPower;
+    private int _banditizm;
+
     private List<IEnemy> _enemies = new List<IEnemy>();
     protected DataPlayer(string titleData)
     {
@@ -58,6 +60,19 @@ abstract class DataPlayer
             {
                 _countPower = value;
                 Notify(DataType.Power);
+            }
+        }
+    }
+
+    public int Banditizm
+    {
+        get => _banditizm;
+        set
+        {
+            if (_banditizm != value)
+            {
+                _banditizm = value;
+                Notify(DataType.Banditizm);
             }
         }
     }
