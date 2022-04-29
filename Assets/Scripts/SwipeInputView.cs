@@ -6,14 +6,16 @@ namespace CarInput
 {
     public class SwipeInputView : BaseInputView
     {
-        private const float _swipeAcceleration = 0.1f;
+        private const float _swipeAcceleration = 0.01f;
         private const float _slowUpPerSecond = 0.5f;
         private float _currentTouchX;
+        private float _forceSpeed;
 
         public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed)
         {
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(OnUpdate);
+            _forceSpeed = speed;
             _speed = 0;
         }
 
@@ -45,7 +47,7 @@ namespace CarInput
                         _currentTouchX = touch.position.x;
                     }
 
-                    AddAcceleration(step * Time.deltaTime * _swipeAcceleration);
+                    AddAcceleration(step * Time.deltaTime * _swipeAcceleration*_forceSpeed);
                 }
             }
             Move();
