@@ -25,9 +25,13 @@ public class MainController : BaseController
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
         _inventoryModel = new InventoryModel();
+        if (_shedController == null)
+            _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi, _inventoryModel);
+        _shedController.ExitFromShed();
     }
     private void OnChangeGameState(GameState state)
     {
+      
         switch (state)
         {
             case GameState.Start:
@@ -49,9 +53,8 @@ public class MainController : BaseController
                 _mainMenuController?.Dispose();
                 _shedController?.Dispose();
                 break;
-            case GameState.Shed: if (_shedController == null)
-                    _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi,_inventoryModel);
-                else _shedController.EnterToShed();
+            case GameState.Shed: 
+                 _shedController.EnterToShed();
                 break;
             default:
                 _mainMenuController?.Dispose();
