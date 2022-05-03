@@ -25,7 +25,7 @@ public class AbilitiesController : BaseController
         ArgumentNullException(nameof(abilityCollectionView));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
         _items = itemsRepository;
-      //  _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+    //   _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
         SetupView(_abilityCollectionView);
         ShowAbilities();
     }
