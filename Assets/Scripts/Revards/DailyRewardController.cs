@@ -71,6 +71,9 @@ public class DailyRewardController
                 var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
                 var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
                 _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
+
+        _dailyRewardView.SliderRewardTimer.maxValue = _dailyRewardView.TimeCooldown;
+                _dailyRewardView.SliderRewardTimer.value = ((float)currentClaimCooldown.TotalSeconds);
             }
             for (var i = 0; i < _slots.Count; i++)
                 _slots[i].SetData(_dailyRewardView.Rewards[i], i + 1, i == _dailyRewardView.CurrentSlotInActive);
