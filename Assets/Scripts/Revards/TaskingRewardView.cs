@@ -16,7 +16,7 @@ internal class TaskingRewardView :MonoBehaviour, IRewardView
     [SerializeField]
     private Button _getRewardButton;
     [SerializeField]
-    private bool _isReady;
+    private Toggle _isReady;
 
 
 
@@ -28,7 +28,7 @@ internal class TaskingRewardView :MonoBehaviour, IRewardView
 
     public Button GetRewardButton => _getRewardButton;
 
-    public bool IsReady { get => _isReady; set => _isReady = value; }
+    public Toggle IsReady { get => _isReady; set => _isReady = value; }
     public int CurrentSlotInActive
     {
         get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);

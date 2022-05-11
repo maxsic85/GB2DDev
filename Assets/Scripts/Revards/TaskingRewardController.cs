@@ -38,7 +38,7 @@ internal class TaskingRewardController : RewardController
     public override void RefreshRewardsState()
     {
         _isGetReward = true;
-        if (_taskingRewardView.IsReady)
+        if (_taskingRewardView.IsReady.isOn)
         {     
                 _isGetReward = true;
             _taskingRewardView.CurrentSlotInActive = 0;
@@ -82,7 +82,7 @@ internal class TaskingRewardController : RewardController
         }
         _taskingRewardView.CurrentSlotInActive = (_taskingRewardView.CurrentSlotInActive + 1) %
         _taskingRewardView.Rewards.Count;
-        _taskingRewardView.IsReady = false;
+        _taskingRewardView.IsReady.isOn = false;
         _isGetReward = false;
         RefreshRewardsState();
     }
