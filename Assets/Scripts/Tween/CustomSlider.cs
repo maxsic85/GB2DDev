@@ -10,12 +10,16 @@ public class CustomSlider : Slider
     public static string ChangeSliderType => nameof(_animationSliderType);
     public static string CurveEase => nameof(_curveEase);
     public static string Duration => nameof(_duration);
+    public static string Streight => nameof(_strength);
+
+
     [SerializeField]
     private AnimationSliderType _animationSliderType = AnimationSliderType.CHANGESCALE;
     [SerializeField]
     private Ease _curveEase = Ease.InBack;
     [SerializeField]
     private float _duration = 3.0f;
+    [SerializeField]
     private float _strength = 30.0f;
     private RectTransform _rectTransform;
     protected override void Awake()
