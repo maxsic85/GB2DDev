@@ -28,6 +28,6 @@ public class MainWindowView : MonoBehaviour
 
     private void ChangeText()
     {
-        _changeText.DOText("I Like Anastasiya", 1.0f).SetEase(Ease.Linear);
+        _changeText.DOText("New Some Text", 1.0f).SetEase(Ease.Linear);
     }
 }
