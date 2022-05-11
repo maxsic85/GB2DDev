@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DailyRewardView : MonoBehaviour
+public class DailyRewardView : MonoBehaviour, IRewardView
 {
     private const string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
     private const string TimeGetRewardKey = nameof(TimeGetRewardKey);

@@ -1,25 +1,23 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DailyRewardController
+public class DailyRewardController : RewardController
 {
     private DailyRewardView _dailyRewardView;
-    private List<ContainerSlotRewardView> _slots;
-    private bool _isGetReward;
-    public DailyRewardController(DailyRewardView generateLevelView)
+    public DailyRewardController(DailyRewardView generateLevelView) : base(generateLevelView)
     {
         _dailyRewardView = generateLevelView;
     }
-    public void RefreshView()
+
+    public override void RefreshView()
     {
         InitSlots();
         _dailyRewardView.StartCoroutine(RewardsStateUpdater());
         RefreshUi();
         SubscribeButtons();
     }
-    private void InitSlots()
+    public override void InitSlots()
     {
         _slots = new List<ContainerSlotRewardView>();
         for (var i = 0; i < _dailyRewardView.Rewards.Count; i++)
@@ -37,7 +35,7 @@ public class DailyRewardController
             yield return new WaitForSeconds(1);
         }
     }
-    private void RefreshRewardsState()
+    public override void RefreshRewardsState()
     {
         _isGetReward = true;
         if (_dailyRewardView.TimeGetReward.HasValue)
@@ -55,7 +53,7 @@ public class DailyRewardController
         }
         RefreshUi();
     }
-    private void RefreshUi()
+    public override void RefreshUi()
     {
         _dailyRewardView.GetRewardButton.interactable = _isGetReward;
         if (_isGetReward)
@@ -72,7 +70,7 @@ public class DailyRewardController
                 var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
                 _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
 
-        _dailyRewardView.SliderRewardTimer.maxValue = _dailyRewardView.TimeCooldown;
+                _dailyRewardView.SliderRewardTimer.maxValue = _dailyRewardView.TimeCooldown;
                 _dailyRewardView.SliderRewardTimer.value = ((float)currentClaimCooldown.TotalSeconds);
             }
             for (var i = 0; i < _slots.Count; i++)
@@ -80,12 +78,12 @@ public class DailyRewardController
         }
     }
 
-    private void SubscribeButtons()
+    public override void SubscribeButtons()
     {
         _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
         _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
     }
-    private void ClaimReward()
+    public override void ClaimReward()
     {
         if (!_isGetReward)
             return;
@@ -110,4 +108,3 @@ public class DailyRewardController
         PlayerPrefs.DeleteAll();
     }
 }
-
