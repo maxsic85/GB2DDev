@@ -12,8 +12,7 @@ public class CustomSlider : Slider
     public static string Duration => nameof(_duration);
     public static string Streight => nameof(_strength);
 
-
-    [SerializeField]
+   [SerializeField]
     private AnimationSliderType _animationSliderType = AnimationSliderType.CHANGESCALE;
     [SerializeField]
     private Ease _curveEase = Ease.InBack;
@@ -22,6 +21,12 @@ public class CustomSlider : Slider
     [SerializeField]
     private float _strength = 30.0f;
     private RectTransform _rectTransform;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+     
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -44,5 +49,10 @@ public class CustomSlider : Slider
 _strength).SetEase(_curveEase);
         break;
         }
+    }
+
+    public virtual void StartAnimation()
+    {
+        ActivateAnimation();
     }
 }

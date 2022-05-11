@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  _animationSliderType: 2
+  _animationSliderType: 1
   _curveEase: 14
   _duration: 3
   _strength: 30

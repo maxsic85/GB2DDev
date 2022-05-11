@@ -10,9 +10,11 @@ using UnityEditor.UIElements;
 public class CustomSliderEditor : SliderEditor
 {
     private SerializedProperty m_InteractableProperty;
+
     protected override void OnEnable()
     {
         m_InteractableProperty = serializedObject.FindProperty("m_Interactable");
+
     }
 
     public override VisualElement CreateInspectorGUI()
@@ -26,6 +28,7 @@ public class CustomSliderEditor : SliderEditor
         var streight = new PropertyField(serializedObject.FindProperty(CustomSlider.Streight));
         var tweenLabel = new Label("Settings Tween");
         var intractableLabel = new Label("Intractable");
+
         root.Add(tweenLabel);
         root.Add(changeSliderType);
         root.Add(curveEase);
@@ -33,11 +36,19 @@ public class CustomSliderEditor : SliderEditor
         root.Add(streight);
         root.Add(intractableLabel);
         root.Add(new IMGUIContainer(OnInspectorGUI));
+        root.Add(new Label("Play Animation"));
+
         return root;
     }
 
     public override void OnInspectorGUI()
     {
+        CustomSlider myScript = (CustomSlider)target;
+        if (GUI.Button(new Rect(250, 10, 200, 25), "Play Animation"))
+        {
+            myScript.StartAnimation();
+        }
+
         serializedObject.Update();
         EditorGUILayout.PropertyField(m_InteractableProperty);
         EditorGUI.BeginChangeCheck();
