@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class CustomButton : Button
 {
@@ -17,16 +18,25 @@ public class CustomButton : Button
     private float _duration = 0.6f;
     private float _strength = 30.0f;
     private RectTransform _rectTransform;
+    private AudioSource _audioSource;
     protected override void Awake()
     {
         base.Awake();
         _rectTransform = GetComponent<RectTransform>();
+        _audioSource = GetComponent<AudioSource>();
     }
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
         ActivateAnimation();
+        ActivateSound();
     }
+
+    private void ActivateSound()
+    {
+        _audioSource.Play();
+    }
+
     private void ActivateAnimation()
     {
         switch (_animationButtonType)

@@ -19,9 +19,15 @@ public class MainMenuController : BaseController
         _adsShower = adsShower;
         _view = LoadView(placeForUi);
         _tileView = LoadTileRender(placeForUi);
-        _view.Init(StartGame,GoToTheShed);
+        _view.Init(StartGame,GoToTheShed,ShowRewards);
         _tileView.Init(StartGame);
     }
+
+    private void ShowRewards()
+    {
+        throw new System.NotImplementedException();
+    }
+
     private TileRenderView LoadTileRender(Transform placeForUi)
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_tileRenderPath), placeForUi, false);

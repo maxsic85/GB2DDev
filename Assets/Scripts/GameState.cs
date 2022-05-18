@@ -4,6 +4,8 @@
     {
         None,
         Shed,
+        Rewards,
+        Fight,
         Start,
         Game
     }

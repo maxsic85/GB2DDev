@@ -47,6 +47,10 @@ public class AbilitiesController : BaseController
     }
     public void ShowAbilities()
     {
+        if (_items==null)
+        {
+            return;
+        }
         foreach (var item in _items.Items.Values)
         {
             _inventoryModel.EquipItem(item);
