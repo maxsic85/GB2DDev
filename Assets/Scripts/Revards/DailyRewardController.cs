@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DailyRewardController
+public class DailyRewardController:BaseController
 {
     private DailyRewardView _dailyRewardView;
     private List<ContainerSlotRewardView> _slots;
+    private CurrencyController _currencyController;
+
     private bool _isGetReward;
-    public DailyRewardController(DailyRewardView generateLevelView)
+    public DailyRewardController(DailyRewardView generateLevelView,Transform transformUi, CurrencyView currencyView)
     {
-        _dailyRewardView = generateLevelView;
+        _dailyRewardView = GameObject.Instantiate(generateLevelView, transformUi);
+        _currencyController = new CurrencyController(currencyView,transformUi);
     }
     public void RefreshView()
     {
@@ -81,6 +84,8 @@ public class DailyRewardController
     {
         _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
         _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
+        _dailyRewardView.ClosseButton.onClick.AddListener(CloseWindow);
+
     }
     private void ClaimReward()
     {
@@ -105,6 +110,20 @@ public class DailyRewardController
     private void ResetTimer()
     {
         PlayerPrefs.DeleteAll();
+    }
+    private void CloseWindow()
+    {
+        GameObject.Destroy(_dailyRewardView.gameObject);
+        _currencyController.CloseWindow();
+    }
+
+    protected override void OnChildDispose()
+    {
+        _dailyRewardView.GetRewardButton.onClick.RemoveAllListeners();
+        _dailyRewardView.ResetButton.onClick.RemoveAllListeners();
+        _dailyRewardView.ClosseButton.onClick.RemoveAllListeners();
+
+        base.OnChildDispose();
     }
 }
 

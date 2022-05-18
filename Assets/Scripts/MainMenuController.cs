@@ -19,7 +19,7 @@ public class MainMenuController : BaseController
         _adsShower = adsShower;
         _view = LoadView(placeForUi);
         _tileView = LoadTileRender(placeForUi);
-        _view.Init(StartGame,GoToTheShed,ShowRewards);
+        _view.Init(StartGame,GoToTheShed,DailyRewardGame);
         _tileView.Init(StartGame);
     }
 
@@ -48,6 +48,11 @@ public class MainMenuController : BaseController
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
 
+    }
+
+    private void DailyRewardGame()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Rewards;
     }
 
     private void GoToTheShed()

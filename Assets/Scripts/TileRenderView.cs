@@ -62,6 +62,11 @@ namespace CarInput
             }
         }
 
+        internal void Init(System.Action startGame, object dailyRewardGame)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void OnDestroy()
         {
             UpdateManager.UnsubscribeFromUpdate(OnUpdate);

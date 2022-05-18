@@ -44,5 +44,3 @@ public class CurrencyView : MonoBehaviour
         _currentCountDiamond.text = Diamonds.ToString();
     }
 }
-
-
