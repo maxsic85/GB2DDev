@@ -338,6 +338,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 693758133}
+  _dailyRewardView: {fileID: 2932730345706817730, guid: ba4c22d13e5a28742891fefc272512e4,
+    type: 3}
+  _currencyView: {fileID: 1619993244037536319, guid: 0690b7836d5fa154097b698153b38acf,
+    type: 3}
+  _fightWindowView: {fileID: 3759901042656300883, guid: 7fb1a58eccea5cc46b93588cd122f535,
+    type: 3}
+  _startFightView: {fileID: 6902375435514752017, guid: d08b3b199a60aa042a18385bb5ada39b,
+    type: 3}
   _unityAdsTool: {fileID: 1002511162}
   _upgradeItemConfigs:
   - {fileID: 11400000, guid: 704ea0abc7235b84b91a71d6134203c4, type: 2}
