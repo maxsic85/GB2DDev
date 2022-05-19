@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class MainMenuView : MonoBehaviour
 {
-    [SerializeField] private Button _buttonStart;
-    [SerializeField] private Button _buttonStartBattle;
-    [SerializeField] private Button _buttonInventory;
-    [SerializeField] private Button _buttonReward;
-    [SerializeField] private Button _buttonExit;
+    [SerializeField] private CustomButton _buttonStart;
+    [SerializeField] private CustomButton _buttonStartBattle;
+    [SerializeField] private CustomButton _buttonInventory;
+    [SerializeField] private CustomButton _buttonReward;
+    [SerializeField] private CustomButton _buttonExit;
 
 
 

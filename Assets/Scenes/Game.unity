@@ -1008,13 +1008,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1899622670}
-        m_TargetAssemblyTypeName: Shoper, Assembly-CSharp
+        m_TargetAssemblyTypeName: ShoperTest, Assembly-CSharp
         m_MethodName: GetBuy
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 500
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1049,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c41f64a20742a4396343d0aa4609fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 1002511159}
 --- !u!114 &1899622671
 MonoBehaviour:
   m_ObjectHideFlags: 0
