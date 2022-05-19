@@ -3,25 +3,48 @@ using System.Collections.Generic;
 using Tools;
 using UnityEngine;
 
-public class MainController : BaseController
+public sealed class MainController : BaseController
 {
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
     private InventoryModel _inventoryModel;
+    private DailyRewardController _dailyRewardController;
+    private FightWindowController _fightWindowController;
+    private CurrencyController _currencyController;
+    private StartFightController _startFightController;
+
+    private DailyRewardView _dailyRewardView;
+    private CurrencyView _currencyView;
+    private FightWindowView _fightWindowView;
+    private StartFightView _startFightView;
+
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
     private readonly List<UpgradeItemConfig> _upgradeItemConfigs;
     private readonly List<AbilityItemConfig> _abilityItemConfigs;
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer,IAdsShower adsShower, List<UpgradeItemConfig> upgradeItemConfigs, List<AbilityItemConfig> abilityItemConfigs)
+    public MainController(Transform placeForUi,
+                        ProfilePlayer profilePlayer,
+                        IAdsShower adsShower,
+                        List<UpgradeItemConfig> upgradeItemConfigs,
+                        List<AbilityItemConfig> abilityItemConfigs,
+                        DailyRewardView dailyRewardView,
+                        CurrencyView currencyView,
+                        FightWindowView fightWindowView,
+                        StartFightView startFightView
+                        )
     {
         _profilePlayer = profilePlayer;
         _upgradeItemConfigs = upgradeItemConfigs;
         _abilityItemConfigs = abilityItemConfigs;
         _adsShower = adsShower;
         _placeForUi = placeForUi;
+        _dailyRewardView = dailyRewardView;
+        _currencyView = currencyView;
+        _fightWindowView = fightWindowView;
+        _startFightView = startFightView;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
         _inventoryModel = new InventoryModel();
@@ -52,12 +75,33 @@ public class MainController : BaseController
             case GameState.Shed:
                  _shedController.EnterToShed();
                 break;
-            default:
+            case GameState.Rewards:
+                _dailyRewardController = new DailyRewardController(_dailyRewardView, _placeForUi, _currencyView);
+                _dailyRewardController.RefreshView();
+                break;
+            case GameState.Fight:
+                _fightWindowController = new FightWindowController(_placeForUi, _fightWindowView, _profilePlayer);
+                _fightWindowController.RefreshView();
+                _startFightController?.Dispose();
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
                 break;
+            default:
+                DisposeAllControllers();
+                break;
         }
     }
+
+    private void DisposeAllControllers()
+    {
+        _mainMenuController?.Dispose();
+        _gameController?.Dispose();
+        _fightWindowController?.Dispose();
+        _dailyRewardController?.Dispose();
+        _startFightController?.Dispose();
+
+    }
+
     protected override void OnChildDispose()
     {
         _mainMenuController?.Dispose();
