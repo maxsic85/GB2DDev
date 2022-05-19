@@ -33,7 +33,6 @@ public class ShedController : BaseController, IShedController
         _inventoryController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);
-        EnterToShed();
     }
     public void EnterToShed()
     {

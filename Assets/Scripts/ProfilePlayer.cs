@@ -1,7 +1,9 @@
 ﻿using Profile.Analytic;
+using System;
 using Tools;
 namespace Profile
 {
+   
     public class ProfilePlayer
     {
         public ProfilePlayer(float speedCar, IAnalyticTools analyticTools)
@@ -9,9 +11,19 @@ namespace Profile
             CurrentState = new SubscriptionProperty<GameState>();
             CurrentCar = new Car(speedCar);
             AnalyticTools = analyticTools;
+            PlayerMoney = new Money(nameof(Money));
+            PlayerHealth = new Health(nameof(Health));
+            PlayerForce = new Force(nameof(Force));
+            PlayerBanditizm = new Banditizm(nameof(Banditizm));
+
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
         public Car CurrentCar { get; }
         public IAnalyticTools AnalyticTools { get; }
+
+        public Money PlayerMoney;
+        public Health PlayerHealth;
+        public Force PlayerForce;
+        public Banditizm PlayerBanditizm;
     }
 }

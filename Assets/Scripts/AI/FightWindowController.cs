@@ -6,11 +6,6 @@ public class FightWindowController : BaseController
     private FightWindowView _fightWindow;
     private ProfilePlayer _profilePlayer;
 
-    private int _allCountMoneyPlayer;
-    private int _allCountHealthPlayer;
-    private int _allCountPowerPlayer;
-    private int _allBanditizmoPlayer;
-
     private Money _money;
     private Health _heath;
     private Force _force;
@@ -25,13 +20,13 @@ public class FightWindowController : BaseController
     public void RefreshView()
     {
         _enemy = new Enemy("Enemy Flappy");
-        _money = new Money(nameof(Money));
+        _money = _profilePlayer.PlayerMoney;
         _money.Attach(_enemy);
-        _heath = new Health(nameof(Health));
+        _heath = _profilePlayer.PlayerHealth;
         _heath.Attach(_enemy);
-        _force = new Force(nameof(Force));
+        _force = _profilePlayer.PlayerForce;
         _force.Attach(_enemy);
-        _banditizm = new Banditizm(nameof(Banditizm));
+        _banditizm = _profilePlayer.PlayerBanditizm;
         _banditizm.Attach(_enemy);
         SubscribeButtons();
     }
@@ -54,42 +49,42 @@ public class FightWindowController : BaseController
     {
         if (isAddCount)
         {
-            _allBanditizmoPlayer++;
-            if (_allBanditizmoPlayer > 2) _fightWindow.ShowPassButton?.Invoke();
+            _profilePlayer.PlayerBanditizm.Banditizm++;
+            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButton?.Invoke();
         }
         else
         {
-            _allBanditizmoPlayer--;
+            _profilePlayer.PlayerBanditizm.Banditizm--;
         }
-        ChangeDataWindow(_allBanditizmoPlayer, DataType.Banditizm);
+        ChangeDataWindow(_profilePlayer.PlayerBanditizm.Banditizm, DataType.Banditizm);
     }
     private void ChangeMoney(bool isAddCount)
     {
         if (isAddCount)
-            _allCountMoneyPlayer++;
+            _profilePlayer.PlayerMoney.Money++;
         else
-            _allCountMoneyPlayer--;
-        ChangeDataWindow(_allCountMoneyPlayer, DataType.Money);
+            _profilePlayer.PlayerMoney.Money--;
+        ChangeDataWindow(_profilePlayer.PlayerMoney.Money, DataType.Money);
     }
     private void ChangeHealth(bool isAddCount)
     {
         if (isAddCount)
-            _allCountHealthPlayer++;
+            _profilePlayer.PlayerHealth.Health++;
         else
-            _allCountHealthPlayer--;
-        ChangeDataWindow(_allCountHealthPlayer, DataType.Health);
+            _profilePlayer.PlayerHealth.Health--;
+        ChangeDataWindow(_profilePlayer.PlayerHealth.Health, DataType.Health);
     }
     private void ChangePower(bool isAddCount)
     {
         if (isAddCount)
-            _allCountPowerPlayer++;
+            _profilePlayer.PlayerForce.Power++;
         else
-            _allCountPowerPlayer--;
-        ChangeDataWindow(_allCountPowerPlayer, DataType.Power);
+            _profilePlayer.PlayerForce.Power--;
+        ChangeDataWindow(_profilePlayer.PlayerForce.Power, DataType.Power);
     }
     private void Fight()
     {
-        Debug.Log(_allCountPowerPlayer >= _enemy.Power
+        Debug.Log(_profilePlayer.PlayerForce.Power >= _enemy.Power
         ? "<color=#07FF00>Win!!!</color>"
         : "<color=#FF0000>Lose!!!</color>");
     }

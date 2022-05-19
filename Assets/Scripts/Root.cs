@@ -19,13 +19,16 @@ public class Root : MonoBehaviour
     [SerializeField]
     private UnityAdsTools _unityAdsTool;
     private MainController _mainController;
+    private ProfilePlayer _profilePlayer;
     [SerializeField] private List<UpgradeItemConfig> _upgradeItemConfigs;
     [SerializeField] private List<AbilityItemConfig> _abilityItemConfigs;
+
+    public ProfilePlayer ProfilePlayer  => _profilePlayer;
     private void Awake()
     {
-        var profilePlayer = new ProfilePlayer(3f, new UnityAnalyticTools());
-        profilePlayer.CurrentState.Value = GameState.Start;
-        _mainController = new MainController(_placeForUi, profilePlayer, _unityAdsTool, _upgradeItemConfigs, _abilityItemConfigs,
+        _profilePlayer = new ProfilePlayer(3f, new UnityAnalyticTools());
+        _profilePlayer.CurrentState.Value = GameState.Start;
+        _mainController = new MainController(_placeForUi, _profilePlayer, _unityAdsTool, _upgradeItemConfigs, _abilityItemConfigs,
                                              _dailyRewardView, _currencyView, _fightWindowView, _startFightView);
     }
     protected void OnDestroy()

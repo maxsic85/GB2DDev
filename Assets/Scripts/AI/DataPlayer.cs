@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-abstract class DataPlayer
+public abstract class DataPlayer
 {
     private string _titleData;
     private int _countMoney;
