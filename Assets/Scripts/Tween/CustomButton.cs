@@ -28,7 +28,7 @@ public class CustomButton : Button
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
-        ActivateAnimation();
+        ActivateAnimation(_animationButtonType);
         ActivateSound();
     }
 
@@ -37,9 +37,9 @@ public class CustomButton : Button
         _audioSource.Play();
     }
 
-    private void ActivateAnimation()
+    private void ActivateAnimation(AnimationButtonType animationButtonType)
     {
-        switch (_animationButtonType)
+        switch (animationButtonType)
         {
             case AnimationButtonType.ChangeRotation:
                 _rectTransform.DOShakeRotation(_duration, Vector3.forward *
@@ -48,6 +48,10 @@ public class CustomButton : Button
             case AnimationButtonType.ChangePosition:
                 _rectTransform.DOShakeAnchorPos(_duration, Vector2.one *
                 _strength).SetEase(_curveEase);
+                break;
+
+            case AnimationButtonType.ChangeScale:
+                _rectTransform.DOScaleX(_duration,1.0f).SetEase(_curveEase);
                 break;
         }
     }
