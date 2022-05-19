@@ -19,7 +19,7 @@ public class MainMenuController : BaseController
         _adsShower = adsShower;
         _view = LoadView(placeForUi);
         _tileView = LoadTileRender(placeForUi);
-        _view.Init(StartGame,GoToTheShed,DailyRewardGame);
+        _view.Init(StartGame,StartBattle,GoToTheShed,DailyRewardGame);
         _tileView.Init(StartGame);
     }
 
@@ -38,18 +38,20 @@ public class MainMenuController : BaseController
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
         AddGameObjects(objectView);
-
         return objectView.GetComponent<MainMenuView>();
     }
-
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
-
     }
-
+    private void StartBattle()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Fight;
+        _adsShower.ShowInterstitial();
+        _profilePlayer.AnalyticTools.SendMessage("start_game");
+    }
     private void DailyRewardGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Rewards;
