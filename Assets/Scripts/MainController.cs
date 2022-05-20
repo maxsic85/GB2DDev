@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public sealed class MainController : BaseController
 {
@@ -24,7 +25,7 @@ public sealed class MainController : BaseController
     private readonly IAdsShower _adsShower;
     private readonly List<UpgradeItemConfig> _upgradeItemConfigs;
     private readonly List<AbilityItemConfig> _abilityItemConfigs;
-
+    private readonly AssetReference _loadPrefabmainMenuView;
     public MainController(Transform placeForUi,
                         ProfilePlayer profilePlayer,
                         IAdsShower adsShower,
@@ -33,9 +34,11 @@ public sealed class MainController : BaseController
                         DailyRewardView dailyRewardView,
                         CurrencyView currencyView,
                         FightWindowView fightWindowView,
-                        StartFightView startFightView
+                        StartFightView startFightView,
+                        AssetReference loadPrefabmainMenuView
                         )
     {
+        _loadPrefabmainMenuView = loadPrefabmainMenuView;
         _profilePlayer = profilePlayer;
         _upgradeItemConfigs = upgradeItemConfigs;
         _abilityItemConfigs = abilityItemConfigs;
@@ -57,7 +60,7 @@ public sealed class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower);              
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower,_loadPrefabmainMenuView);              
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

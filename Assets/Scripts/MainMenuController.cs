@@ -1,7 +1,10 @@
 ﻿using CarInput;
 using Profile;
+using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class MainMenuController : BaseController
 {
@@ -10,16 +13,19 @@ public class MainMenuController : BaseController
 
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
-    private readonly MainMenuView _view;
+    private MainMenuView _view;
     private readonly TileRenderView _tileView;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower)
+
+    private AssetReference _loadPrefab;
+    private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new List<AsyncOperationHandle<GameObject>>();
+
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab)
     {
         _profilePlayer = profilePlayer;
         _adsShower = adsShower;
-        _view = LoadView(placeForUi);
+        LoadView(loadPrefab, placeForUi);
         _tileView = LoadTileRender(placeForUi);
-        _view.Init(StartGame,StartBattle,GoToTheShed,DailyRewardGame);
         _tileView.Init(StartGame);
     }
 
@@ -39,6 +45,18 @@ public class MainMenuController : BaseController
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
         AddGameObjects(objectView);
         return objectView.GetComponent<MainMenuView>();
+    }
+
+    private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
+    {
+        var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
+        if (addressablePrefab != null)
+        {
+
+            _view = addressablePrefab.gameObject.GetComponent<MainMenuView>();
+            _view.Init(StartGame, StartBattle, GoToTheShed, DailyRewardGame);
+
+        }
     }
     private void StartGame()
     {

@@ -352,6 +352,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 192dc3d9ed3f8994c857ccfc3617e1f4, type: 2}
   _abilityItemConfigs:
   - {fileID: 11400000, guid: b20c1c0024650774a98a033e26be89c7, type: 2}
+  _loadPrefab:
+    m_AssetGUID: fb2ba7846b9974846b53b85e718a7908
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!4 &1002511161
 Transform:
   m_ObjectHideFlags: 0
