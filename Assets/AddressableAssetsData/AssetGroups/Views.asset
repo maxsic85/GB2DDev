@@ -27,6 +27,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - View
+  - m_GUID: 7fb1a58eccea5cc46b93588cd122f535
+    m_Address: Prefabs/Fight Window
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - View
+  - m_GUID: 0690b7836d5fa154097b698153b38acf
+    m_Address: Prefabs/CurrencyView
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - View
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: dfff75a5fe692cf49b9d47e0f0c53144, type: 2}
   m_SchemaSet:
