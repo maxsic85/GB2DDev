@@ -10,19 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: New Table Shared Data
+  m_Name: MainMenu Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Font
-  m_TableCollectionNameGuidString: f87fb45112053f140be96971a22cc99d
-  m_Entries:
-  - m_Id: 121276579840
-    m_Key: translate_text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12575167594496
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
+  m_TableCollectionName: MainMenu
+  m_TableCollectionNameGuidString: 00000000000000000000000000000000
+  m_Entries: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -33,4 +25,4 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1653295955370
+        m_CustomEpoch: 1653300098016
