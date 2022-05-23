@@ -16,9 +16,9 @@ public class MainMenuController : BaseController
     private MainMenuView _view;
     private readonly TileRenderView _tileView;
 
+    private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new
+List<AsyncOperationHandle<GameObject>>();
 
-    private AssetReference _loadPrefab;
-    private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new List<AsyncOperationHandle<GameObject>>();
 
     public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab)
     {
@@ -29,10 +29,10 @@ public class MainMenuController : BaseController
         _tileView.Init(StartGame);
     }
 
-    private void ShowRewards()
-    {
-        throw new System.NotImplementedException();
-    }
+    //private void ShowRewards()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     private TileRenderView LoadTileRender(Transform placeForUi)
     {
@@ -54,6 +54,7 @@ public class MainMenuController : BaseController
         {
 
             _view = addressablePrefab.gameObject.GetComponent<MainMenuView>();
+            AddGameObjects(addressablePrefab.gameObject);
             _view.Init(StartGame, StartBattle, GoToTheShed, DailyRewardGame);
 
         }
@@ -78,6 +79,14 @@ public class MainMenuController : BaseController
     private void GoToTheShed()
     {
         _profilePlayer.CurrentState.Value = GameState.Shed;
+    }
+
+    protected override void OnChildDispose()
+    {
+        foreach (var addressablePrefab in _addressablePrefabs)
+            Addressables.ReleaseInstance(addressablePrefab);
+        _addressablePrefabs.Clear();
+        base.OnChildDispose();
     }
 }
 

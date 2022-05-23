@@ -11,6 +11,6 @@ public class InstallView : MonoBehaviour
     }
     private void Start()
     {
-        _dailyRewardController.RefreshView();
+     //   _dailyRewardController.RefreshView();
     }
 }

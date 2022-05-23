@@ -1,12 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class CurrencyController
 {
     private CurrencyView _currencyView;
 
-    public CurrencyController(CurrencyView currencyView, Transform placeUI)
+    public CurrencyController(AssetReference currencyView, Transform placeUI)
     {
-        _currencyView = GameObject.Instantiate(currencyView, placeUI);
+        //_currencyView = GameObject.Instantiate(currencyView, placeUI);
+        LoadView(currencyView,placeUI);
+    }
+
+    private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
+    {
+        var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
+        if (addressablePrefab != null)
+        {
+
+            _currencyView = addressablePrefab.gameObject.GetComponent<CurrencyView>();
+            _currencyView.gameObject.transform.SetAsLastSibling();
+
+
+        }
     }
 
     public void CloseWindow()

@@ -1,5 +1,6 @@
 ﻿using Profile;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class FightWindowController : BaseController
 {
@@ -12,10 +13,25 @@ public class FightWindowController : BaseController
     private Banditizm _banditizm;
     private Enemy _enemy;
 
-    public FightWindowController(Transform transformForUI, FightWindowView fightWindow, ProfilePlayer profilePlayer)
+    public FightWindowController(AssetReference fightWindow,Transform transformForUI, ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
-        _fightWindow = GameObject.Instantiate(fightWindow, transformForUI);
+        LoadView(fightWindow,transformForUI);
+     //   _fightWindow = GameObject.Instantiate(fightWindow, transformForUI);
+    }
+
+    private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
+    {
+        var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
+        if (addressablePrefab != null)
+        {
+
+            _fightWindow = addressablePrefab.gameObject.GetComponent<FightWindowView>();
+            RefreshView();
+          
+
+
+        }
     }
     public void RefreshView()
     {

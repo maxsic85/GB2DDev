@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - View
+  - m_GUID: ba4c22d13e5a28742891fefc272512e4
+    m_Address: Prefabs/RewardWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - View
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: dfff75a5fe692cf49b9d47e0f0c53144, type: 2}
   m_SchemaSet:

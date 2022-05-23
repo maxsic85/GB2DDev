@@ -15,9 +15,9 @@ public sealed class MainController : BaseController
     private CurrencyController _currencyController;
     private StartFightController _startFightController;
 
-    private DailyRewardView _dailyRewardView;
-    private CurrencyView _currencyView;
-    private FightWindowView _fightWindowView;
+    private AssetReference _dailyRewardView;
+    private AssetReference _currencyView;
+    private AssetReference _fightWindowView;
     private StartFightView _startFightView;
 
     private readonly Transform _placeForUi;
@@ -31,9 +31,9 @@ public sealed class MainController : BaseController
                         IAdsShower adsShower,
                         List<UpgradeItemConfig> upgradeItemConfigs,
                         List<AbilityItemConfig> abilityItemConfigs,
-                        DailyRewardView dailyRewardView,
-                        CurrencyView currencyView,
-                        FightWindowView fightWindowView,
+                        AssetReference dailyRewardView,
+                        AssetReference currencyView,
+                        AssetReference fightWindowView,
                         StartFightView startFightView,
                         AssetReference loadPrefabmainMenuView
                         )
@@ -80,11 +80,11 @@ public sealed class MainController : BaseController
                 break;
             case GameState.Rewards:
                 _dailyRewardController = new DailyRewardController(_dailyRewardView, _placeForUi, _currencyView);
-                _dailyRewardController.RefreshView();
+                //_dailyRewardController.RefreshView();
                 break;
             case GameState.Fight:
-                _fightWindowController = new FightWindowController(_placeForUi, _fightWindowView, _profilePlayer);
-                _fightWindowController.RefreshView();
+                _fightWindowController = new FightWindowController(_fightWindowView,_placeForUi, _profilePlayer);
+             //  _fightWindowController.RefreshView();
                 _startFightController?.Dispose();
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
