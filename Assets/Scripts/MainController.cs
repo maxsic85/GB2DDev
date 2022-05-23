@@ -74,17 +74,16 @@ public sealed class MainController : BaseController
                 _gameController = new GameController(_profilePlayer,_abilityItemConfigs, _inventoryModel,_placeForUi);
                 _mainMenuController?.Dispose();
                 _shedController?.Dispose();
+                _startFightController?.Dispose();
                 break;
             case GameState.Shed:
                  _shedController.EnterToShed();
                 break;
             case GameState.Rewards:
                 _dailyRewardController = new DailyRewardController(_dailyRewardView, _placeForUi, _currencyView);
-                //_dailyRewardController.RefreshView();
                 break;
             case GameState.Fight:
                 _fightWindowController = new FightWindowController(_fightWindowView,_placeForUi, _profilePlayer);
-             //  _fightWindowController.RefreshView();
                 _startFightController?.Dispose();
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();

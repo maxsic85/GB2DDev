@@ -139,6 +139,7 @@ public class FightWindowController : BaseController
 
     private void CloseWindow()
     {
+        GameObject.Destroy(_fightWindow.gameObject);
         _profilePlayer.CurrentState.Value = GameState.Game;
     }
     protected override void OnChildDispose()
@@ -152,6 +153,7 @@ public class FightWindowController : BaseController
         _fightWindow.FightButton.onClick.RemoveAllListeners();
         _fightWindow.AddPBanditizmButton.onClick.RemoveAllListeners();
         _fightWindow.MinusBanditizmButton.onClick.RemoveAllListeners();
+        _fightWindow.LeaveFightButton.onClick.RemoveAllListeners();
         _money.Detach(_enemy);
         _heath.Detach(_enemy);
         _force.Detach(_enemy);
