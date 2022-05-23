@@ -60,13 +60,18 @@ public class FightWindowController : BaseController
         _fightWindow.PassButton.onClick.AddListener(Pass);
         _fightWindow.FightButton.onClick.AddListener(Fight);
         _fightWindow.LeaveFightButton.onClick.AddListener(CloseWindow);
+
+        _fightWindow.ShowPassButtonAction += OnShowPassButton;
+   
+
+
     }
     private void ChangeBanditizm(bool isAddCount)
     {
         if (isAddCount)
         {
             _profilePlayer.PlayerBanditizm.Banditizm++;
-            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButton?.Invoke();
+            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButtonAction?.Invoke();
         }
         else
         {
@@ -111,7 +116,7 @@ public class FightWindowController : BaseController
 
     private void OnShowPassButton()
     {
-        _fightWindow.PassButton.gameObject.SetActive(false);
+        _fightWindow.PassButton.gameObject.SetActive(true);
     }
     private void ChangeDataWindow(int countChangeData, DataType dataType)
     {
@@ -154,6 +159,7 @@ public class FightWindowController : BaseController
         _fightWindow.AddPBanditizmButton.onClick.RemoveAllListeners();
         _fightWindow.MinusBanditizmButton.onClick.RemoveAllListeners();
         _fightWindow.LeaveFightButton.onClick.RemoveAllListeners();
+        _fightWindow.ShowPassButtonAction -= OnShowPassButton;
         _money.Detach(_enemy);
         _heath.Detach(_enemy);
         _force.Detach(_enemy);

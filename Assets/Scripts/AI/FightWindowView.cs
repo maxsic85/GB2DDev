@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FightWindowView : MonoBehaviour
 {
-    public Action ShowPassButton;
+    public Action ShowPassButtonAction;
 
     [SerializeField]
     private TMP_Text _countMoneyText;
@@ -60,5 +60,10 @@ public class FightWindowView : MonoBehaviour
     public Button AddPBanditizmButton => _addPBanditizmButton;
     public Button MinusBanditizmButton => _minusBanditizmButton;
     public Button PassButton => _passButton;
+
+    private void Awake()
+    {
+        _passButton.gameObject.SetActive(false);
+    }
 }
 

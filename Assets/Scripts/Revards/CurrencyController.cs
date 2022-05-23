@@ -7,7 +7,6 @@ public class CurrencyController
 
     public CurrencyController(AssetReference currencyView, Transform placeUI)
     {
-        //_currencyView = GameObject.Instantiate(currencyView, placeUI);
         LoadView(currencyView,placeUI);
     }
 
@@ -18,9 +17,7 @@ public class CurrencyController
         {
 
             _currencyView = addressablePrefab.gameObject.GetComponent<CurrencyView>();
-            _currencyView.gameObject.transform.SetAsLastSibling();
-
-
+          
         }
     }
 
