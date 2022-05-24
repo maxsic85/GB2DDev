@@ -23,13 +23,13 @@ public sealed class MainController : BaseController
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
-    private readonly List<UpgradeItemConfig> _upgradeItemConfigs;
+    private readonly UpgradeItemConfigDataSource _upgradeItemConfigs;
     private readonly List<AbilityItemConfig> _abilityItemConfigs;
     private readonly AssetReference _loadPrefabmainMenuView;
     public MainController(Transform placeForUi,
                         ProfilePlayer profilePlayer,
                         IAdsShower adsShower,
-                        List<UpgradeItemConfig> upgradeItemConfigs,
+                       UpgradeItemConfigDataSource upgradeItemConfigs,
                         List<AbilityItemConfig> abilityItemConfigs,
                         AssetReference dailyRewardView,
                         AssetReference currencyView,

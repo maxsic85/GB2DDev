@@ -1,18 +1,18 @@
-﻿public class SpeedUpgradeCarHandler : IUpgradeCarHandler
+﻿public class PowerUpgrateHandler : IUpgradeCarHandler
 {
     #region Fields
-    private readonly float _speed;
+    private readonly float _power;
     #endregion
     #region Life cycle
-    public SpeedUpgradeCarHandler(float power)
+    public PowerUpgrateHandler(float power)
     {
-        _speed = power;
+        _power = power;
     }
     #endregion
     #region IUpgradeHandler
     public IUpgradableCar Upgrade(IUpgradableCar upgradableCar)
     {
-        upgradableCar.Speed = _speed;
+        upgradableCar.Power = _power;
         return upgradableCar;
     }
     #endregion

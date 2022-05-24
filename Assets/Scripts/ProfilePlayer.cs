@@ -14,7 +14,7 @@ namespace Profile
             PlayerMoney = new Money(nameof(Money));
             PlayerHealth = new Health(nameof(Health));
             PlayerForce = new Force(nameof(Force));
-            PlayerBanditizm = new Banditizm(nameof(Banditizm));
+            PlayerBanditizm = new Banditry(nameof(Banditry));
 
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
@@ -24,6 +24,6 @@ namespace Profile
         public Money PlayerMoney;
         public Health PlayerHealth;
         public Force PlayerForce;
-        public Banditizm PlayerBanditizm;
+        public Banditry PlayerBanditizm;
     }
 }

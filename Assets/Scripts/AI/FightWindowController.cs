@@ -10,7 +10,7 @@ public class FightWindowController : BaseController
     private Money _money;
     private Health _heath;
     private Force _force;
-    private Banditizm _banditizm;
+    private Banditry _banditizm;
     private Enemy _enemy;
 
     public FightWindowController(AssetReference fightWindow,Transform transformForUI, ProfilePlayer profilePlayer)

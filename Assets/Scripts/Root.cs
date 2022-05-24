@@ -21,7 +21,7 @@ public class Root : MonoBehaviour
     private UnityAdsTools _unityAdsTool;
     private MainController _mainController;
     private ProfilePlayer _profilePlayer;
-    [SerializeField] private List<UpgradeItemConfig> _upgradeItemConfigs;
+    [SerializeField] private UpgradeItemConfigDataSource _upgradeItemConfigs;
     [SerializeField] private List<AbilityItemConfig> _abilityItemConfigs;
 
     [SerializeField]

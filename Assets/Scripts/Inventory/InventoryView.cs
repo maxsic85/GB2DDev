@@ -14,13 +14,17 @@ public class InventoryView : MonoBehaviour, IInventoryView
 
     public void Init(List<IItem> items)
     {
-        _itemInfoCollection = new List<IItem>(2);
+        _itemInfoCollection = new List<IItem>();
         _itemInfoCollection = items;
         foreach (var item in _itemInfoCollection)
         {
-            _itemsObjectsView.Add(GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), transform, false));
+            _itemsObjectsView.Add(GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), transform.GetChild(0), false));
+
             _itemsObjectsView.LastOrDefault().transform.GetChild(0).GetComponent<Text>().text = item.Info.Title;
             _itemsObjectsView.LastOrDefault().transform.GetChild(1).GetComponent<Image>().sprite = item.Info.Sprite;
+            _itemsObjectsView.LastOrDefault().transform.GetChild(2).GetComponent<Text>().text =$"{item.Info.UpgradeType}+ {item.Info.Value.ToString()}";
+            _itemsObjectsView.LastOrDefault().transform.GetChild(3).GetComponent<Text>().text =$"Price: {item.Info.Price.ToString()}";
+
             _itemView = _itemsObjectsView.LastOrDefault().GetComponent<InventoryItemView>();
             _itemView.Init(item);
             _itemView.OnClick += OnSelected;

@@ -16,7 +16,32 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 7253e2222adb6f2439f88a79463dc16e, type: 2}
   m_Metadata:
-    m_Items: []
-  m_TableData: []
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 21577973760
+    m_Localized: Start Game
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 161067941888
+    m_Localized: To the garage
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 199928168448
+    m_Localized: Daily Rewards
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 246128427008
+    m_Localized: Exit
+    m_Metadata:
+      m_Items:
+      - id: 0
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00c025060500000000c065802500000000c0a58c2e00000000c0654e39000000

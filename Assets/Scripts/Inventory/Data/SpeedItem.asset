@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595592aa502bd7d4e88d667f1cb35e15, type: 3}
-  m_Name: SlowerUpdrateItem
+  m_Script: {fileID: 11500000, guid: 1bedcf9e2ef5a7e438888fa600799500, type: 3}
+  m_Name: SpeedItem
   m_EditorClassIdentifier: 
-  itemConfig: {fileID: 11400000, guid: ac310844ae7429e408ef978a6291240e, type: 2}
-  type: 1
-  value: 50
+  id: 1
+  title: Railing
+  image: {fileID: 21300000, guid: a0aa6196d79b5db419e9a18c8927b98a, type: 3}

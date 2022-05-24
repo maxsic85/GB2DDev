@@ -1,18 +1,18 @@
-﻿public class SpeedUpgradeCarHandler : IUpgradeCarHandler
+﻿public class BandetryUpgrateHandler : IUpgradeCarHandler
 {
     #region Fields
-    private readonly float _speed;
+    private readonly float _bandetry;
     #endregion
     #region Life cycle
-    public SpeedUpgradeCarHandler(float power)
+    public BandetryUpgrateHandler(float bandetry)
     {
-        _speed = power;
+        _bandetry = bandetry;
     }
     #endregion
     #region IUpgradeHandler
     public IUpgradableCar Upgrade(IUpgradableCar upgradableCar)
     {
-        upgradableCar.Speed = _speed;
+        upgradableCar.Bandetry = _bandetry;
         return upgradableCar;
     }
     #endregion

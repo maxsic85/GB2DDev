@@ -19,10 +19,6 @@ MonoBehaviour:
     m_Key: translate_text
     m_Metadata:
       m_Items: []
-  - m_Id: 12575167594496
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

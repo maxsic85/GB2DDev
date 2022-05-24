@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595592aa502bd7d4e88d667f1cb35e15, type: 3}
-  m_Name: RailingConfig
+  m_Script: {fileID: 11500000, guid: 1bedcf9e2ef5a7e438888fa600799500, type: 3}
+  m_Name: ForceItem
   m_EditorClassIdentifier: 
-  itemConfig: {fileID: 11400000, guid: 89cd8a541f2e1244da036acba8e40986, type: 2}
-  type: 1
-  value: 100
+  id: 2
+  title: Slower
+  image: {fileID: 21300000, guid: 1304343364e1ade40a93931a5dacc822, type: 3}
