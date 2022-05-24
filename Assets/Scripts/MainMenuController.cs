@@ -8,12 +8,16 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class MainMenuController : BaseController
 {
+    private readonly ResourcePath _carviewPath = new ResourcePath { PathResource = "Prefabs/CarViewInfo" };
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
+
     private readonly ResourcePath _tileRenderPath = new ResourcePath { PathResource = "Prefabs/tileRender" };
 
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
     private MainMenuView _view;
+    private CarInfoView _carview;
+
     private readonly TileRenderView _tileView;
 
     private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new
@@ -27,6 +31,9 @@ List<AsyncOperationHandle<GameObject>>();
         LoadView(loadPrefab, placeForUi);
         _tileView = LoadTileRender(placeForUi);
         _tileView.Init(StartGame);
+
+        _carview = LoadView(placeForUi);
+        _carview.Init(profilePlayer);
     }
 
     //private void ShowRewards()
@@ -40,11 +47,11 @@ List<AsyncOperationHandle<GameObject>>();
         AddGameObjects(objectView);
         return objectView.GetComponent<TileRenderView>();
     }
-    private MainMenuView LoadView(Transform placeForUi)
+    private CarInfoView LoadView(Transform placeForUi)
     {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
+        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_carviewPath), placeForUi, false);
         AddGameObjects(objectView);
-        return objectView.GetComponent<MainMenuView>();
+        return objectView.GetComponent<CarInfoView>();
     }
 
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
@@ -62,6 +69,7 @@ List<AsyncOperationHandle<GameObject>>();
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
+        _profilePlayer.CurrenMoney.Value = _profilePlayer.PlayerMoney.Money;
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
     }

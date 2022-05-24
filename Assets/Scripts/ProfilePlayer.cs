@@ -9,6 +9,8 @@ namespace Profile
         public ProfilePlayer(float speedCar, IAnalyticTools analyticTools)
         {
             CurrentState = new SubscriptionProperty<GameState>();
+            CurrenMoney = new SubscriptionProperty<float>();
+
             CurrentCar = new Car(speedCar);
             AnalyticTools = analyticTools;
             PlayerMoney = new Money(nameof(Money));
@@ -18,6 +20,8 @@ namespace Profile
 
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
+        public SubscriptionProperty<float> CurrenMoney { get; }
+
         public Car CurrentCar { get; }
         public IAnalyticTools AnalyticTools { get; }
 

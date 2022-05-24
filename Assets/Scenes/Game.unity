@@ -480,9 +480,8 @@ MonoBehaviour:
   _startFightView: {fileID: 6902375435514752017, guid: d08b3b199a60aa042a18385bb5ada39b,
     type: 3}
   _unityAdsTool: {fileID: 1002511162}
-  _upgradeItemConfigs:
-  - {fileID: 11400000, guid: 704ea0abc7235b84b91a71d6134203c4, type: 2}
-  - {fileID: 11400000, guid: 192dc3d9ed3f8994c857ccfc3617e1f4, type: 2}
+  _upgradeItemConfigs: {fileID: 11400000, guid: 9348c48cd11c12a4ab0a7f9fcf2ab8ba,
+    type: 2}
   _abilityItemConfigs:
   - {fileID: 11400000, guid: b20c1c0024650774a98a033e26be89c7, type: 2}
   _loadMainMenuView:

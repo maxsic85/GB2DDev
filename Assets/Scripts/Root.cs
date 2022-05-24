@@ -40,7 +40,8 @@ public class Root : MonoBehaviour
     {
             _profilePlayer = new ProfilePlayer(3f, new UnityAnalyticTools());
             _profilePlayer.CurrentState.Value = GameState.Start;
-            _mainController = new MainController(_placeForUi, _profilePlayer, _unityAdsTool, _upgradeItemConfigs, _abilityItemConfigs,
+        _profilePlayer.CurrenMoney.Value = _profilePlayer.PlayerMoney.Money;
+        _mainController = new MainController(_placeForUi, _profilePlayer, _unityAdsTool, _upgradeItemConfigs, _abilityItemConfigs,
                                                  _loadDailyRewardView, _loadCurrencyView, _loadWindowFightView, _startFightView, _loadMainMenuView);
        
     }

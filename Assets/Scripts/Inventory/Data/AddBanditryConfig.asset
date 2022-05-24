@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595592aa502bd7d4e88d667f1cb35e15, type: 3}
   m_Name: AddBanditryConfig
   m_EditorClassIdentifier: 
-  itemConfig: {fileID: 0}
-  type: 0
-  value: 0
-  price: 0
+  itemConfig: {fileID: 11400000, guid: bbfb8a60d89ceaa4082510383b7ef1a8, type: 2}
+  value: 2
+  price: 5

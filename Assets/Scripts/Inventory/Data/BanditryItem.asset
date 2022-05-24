@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BanditryItem
   m_EditorClassIdentifier: 
   id: 0
-  title: 
-  image: {fileID: 0}
+  title: Bandetry
+  image: {fileID: -6063193139565258881, guid: 07fa4a9616a73f34785703310e3f094b, type: 3}

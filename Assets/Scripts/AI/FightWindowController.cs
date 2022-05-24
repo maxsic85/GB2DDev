@@ -82,7 +82,11 @@ public class FightWindowController : BaseController
     private void ChangeMoney(bool isAddCount)
     {
         if (isAddCount)
+        { 
             _profilePlayer.PlayerMoney.Money++;
+        
+        _profilePlayer.CurrenMoney.Value++;
+        }
         else
             _profilePlayer.PlayerMoney.Money--;
         ChangeDataWindow(_profilePlayer.PlayerMoney.Money, DataType.Money);
