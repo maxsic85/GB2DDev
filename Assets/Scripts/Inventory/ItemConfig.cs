@@ -7,8 +7,7 @@ public class ItemConfig : ScriptableObject
 {
     public int id;
     public string title;
-    public float value;
-    public int price;
+
 
     public Sprite image;
 }

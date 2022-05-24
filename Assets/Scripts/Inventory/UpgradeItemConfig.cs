@@ -9,8 +9,6 @@ public class UpgradeItemConfig : ScriptableObject
     public int price;
 
     public int Id => itemConfig.id;
-    public float Value => itemConfig.value;
-    public int Price => itemConfig.price;
 
     public UpgradeType UpgrtType => type;
 }
