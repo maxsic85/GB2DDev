@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using  Mobile.Resourses.Path;
 public class InventoryView : MonoBehaviour, IInventoryView
 {
     public event Action<IItem> Selected;
     public event Action<IItem> Deselected;
     private List<IItem> _itemInfoCollection;
     private List<GameObject> _itemsObjectsView=new List<GameObject>();
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Item" };
     private InventoryItemView _itemView;
 
     public void Init(List<IItem> items)
@@ -18,7 +18,7 @@ public class InventoryView : MonoBehaviour, IInventoryView
         _itemInfoCollection = items;
         foreach (var item in _itemInfoCollection)
         {
-            _itemsObjectsView.Add(GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), transform.GetChild(0), false));
+            _itemsObjectsView.Add(GameObject.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._ItemviewPath), transform.GetChild(0), false));
 
             _itemsObjectsView.LastOrDefault().transform.GetChild(0).GetComponent<Text>().text = item.Info.Title;
             _itemsObjectsView.LastOrDefault().transform.GetChild(1).GetComponent<Image>().sprite = item.Info.Sprite;

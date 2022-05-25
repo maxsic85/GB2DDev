@@ -10,7 +10,6 @@ namespace Profile
         {
             CurrentState = new SubscriptionProperty<GameState>();
 
-            CurrentCar = new Car(speedCar);
             AnalyticTools = analyticTools;
             PlayerMoney = new Money(nameof(Money));
             PlayerSpeed = new Speed(nameof(Money));
@@ -29,6 +28,7 @@ namespace Profile
             CurrenBandetry = new SubscriptionProperty<int>();
             CurrenBandetry.Value = this.PlayerBandetry.Bandentry;
 
+            CurrentCar = new Car(CurrenSpeed.Value);
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
         public SubscriptionProperty<int> CurrenMoney { get; }
