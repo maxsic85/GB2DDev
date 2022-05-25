@@ -1,4 +1,5 @@
-﻿using Profile;
+﻿using Mobile.Resourses.Path;
+using Profile;
 using System.Collections.Generic;
 using Tools;
 using UnityEngine;
@@ -18,7 +19,8 @@ public sealed class MainController : BaseController
     private AssetReference _dailyRewardView;
     private AssetReference _currencyView;
     private AssetReference _fightWindowView;
-    private StartFightView _startFightView;
+    private CarInfoView  _carInfoView;
+
 
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -47,7 +49,8 @@ public sealed class MainController : BaseController
         _dailyRewardView = dailyRewardView;
         _currencyView = currencyView;
         _fightWindowView = fightWindowView;
-        _startFightView = startFightView;
+        _carInfoView = LoadCarInfoView(placeForUi);
+        AddGameObjects(_carInfoView.gameObject);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
         _inventoryModel = new InventoryModel();
@@ -55,12 +58,20 @@ public sealed class MainController : BaseController
             _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi, _inventoryModel);
         AddController(_shedController);
     }
+
+    private CarInfoView LoadCarInfoView(Transform placeForUi)
+    {
+        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._carviewPath), placeForUi, false);
+        AddGameObjects(objectView);
+        return objectView.GetComponent<CarInfoView>();
+    }
+
     private void OnChangeGameState(GameState state)
     {
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower,_loadPrefabmainMenuView);              
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower,_loadPrefabmainMenuView,_carInfoView);              
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

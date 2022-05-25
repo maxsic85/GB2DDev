@@ -5,14 +5,10 @@ using Tools;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Mobile.Resourses.Path;
 
 public class MainMenuController : BaseController
 {
-    private readonly ResourcePath _carviewPath = new ResourcePath { PathResource = "Prefabs/CarViewInfo" };
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
-
-    private readonly ResourcePath _tileRenderPath = new ResourcePath { PathResource = "Prefabs/tileRender" };
-
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
     private MainMenuView _view;
@@ -24,7 +20,7 @@ public class MainMenuController : BaseController
 List<AsyncOperationHandle<GameObject>>();
 
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab)
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab,CarInfoView carInfoView)
     {
         _profilePlayer = profilePlayer;
         _adsShower = adsShower;
@@ -32,7 +28,7 @@ List<AsyncOperationHandle<GameObject>>();
         _tileView = LoadTileRender(placeForUi);
         _tileView.Init(StartGame);
 
-        _carview = LoadView(placeForUi);
+        _carview = carInfoView;
         _carview.Init(profilePlayer);
    
 
@@ -45,17 +41,11 @@ List<AsyncOperationHandle<GameObject>>();
 
     private TileRenderView LoadTileRender(Transform placeForUi)
     {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_tileRenderPath), placeForUi, false);
+        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._tileRenderPath), placeForUi, false);
         AddGameObjects(objectView);
         return objectView.GetComponent<TileRenderView>();
     }
-    private CarInfoView LoadView(Transform placeForUi)
-    {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_carviewPath), placeForUi, false);
-        AddGameObjects(objectView);
-        return objectView.GetComponent<CarInfoView>();
-    }
-
+   
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
     {
         var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
