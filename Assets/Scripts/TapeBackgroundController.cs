@@ -1,6 +1,6 @@
 ﻿using Tools;
 using UnityEngine;
-
+using Mobile.Resourses.Path;
 public class TapeBackgroundController : BaseController
 {
     public TapeBackgroundController(IReadOnlySubscriptionProperty<float> leftMove, 
@@ -17,8 +17,7 @@ public class TapeBackgroundController : BaseController
         _leftMove.SubscribeOnChange(Move);
         _rightMove.SubscribeOnChange(Move);
     }
-    
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/background"};
+       
     private TapeBackgroundView _view;
     private readonly SubscriptionProperty<float> _diff;
     private readonly IReadOnlySubscriptionProperty<float> _leftMove;
@@ -33,7 +32,7 @@ public class TapeBackgroundController : BaseController
     }
     private TapeBackgroundView LoadView()
     {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
+        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._backgroundViewPath));
         AddGameObjects(objView);
         
         return objView.GetComponent<TapeBackgroundView>();

@@ -9,12 +9,6 @@ public class Root : MonoBehaviour
 {
     [SerializeField]
     private Transform _placeForUi;
-
-    private DailyRewardView _dailyRewardView;
-    [SerializeField]
-    private CurrencyView _currencyView;
-    [SerializeField]
-    private FightWindowView _fightWindowView;
     [SerializeField]
     private StartFightView _startFightView;
     [SerializeField]

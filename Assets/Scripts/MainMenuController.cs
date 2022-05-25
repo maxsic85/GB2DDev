@@ -33,12 +33,6 @@ List<AsyncOperationHandle<GameObject>>();
    
 
     }
-
-    //private void ShowRewards()
-    //{
-    //    throw new System.NotImplementedException();
-    //}
-
     private TileRenderView LoadTileRender(Transform placeForUi)
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._tileRenderPath), placeForUi, false);
@@ -61,7 +55,6 @@ List<AsyncOperationHandle<GameObject>>();
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
-     //   _profilePlayer.CurrenMoney.Value = _profilePlayer.PlayerMoney.Money;
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
     }
