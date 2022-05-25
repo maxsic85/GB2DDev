@@ -3,10 +3,10 @@ using System.Collections.Generic;
 public abstract class DataPlayer
 {
     private string _titleData;
-    private int _countMoney;
-    private int _countHealth;
-    private int _countPower;
-    private int _banditizm;
+    private int _countMoney=0;
+    private int _countHealth=10;
+    private int _countPower=5;
+    private int _banditizm=1;
 
     private List<IEnemy> _enemies = new List<IEnemy>();
     protected DataPlayer(string titleData)

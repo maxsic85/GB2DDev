@@ -11,7 +11,6 @@ public class CarInfoView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _powerText;
     [SerializeField] private TextMeshProUGUI _banditryText;
 
-
     public TextMeshProUGUI MoneyText { get => _moneyText; set => _moneyText = value; }
     public TextMeshProUGUI SpeedText { get => _speedText; set => _speedText = value; }
     public TextMeshProUGUI PowerText { get => _powerText; set => _powerText = value; }
@@ -34,24 +33,25 @@ public class CarInfoView : MonoBehaviour
     }
     public void UpdateViewMoney(int money)
     {
-        StringBuilder sb = new StringBuilder();
-
-        _moneyText.text = money.ToString();
-
+        var moneyTxt = $"Money:  {money.ToString()}";
+        _moneyText.text = moneyTxt.ToString();
     }
 
     private void UpdateViewBandetry(int value)
     {
-        _banditryText.text = value.ToString();
+        var bandetryTxt = $"Bandetry:  {value.ToString()}";
+        _banditryText.text = bandetryTxt;
     }
 
     private void UpdateViewPower(int value)
     {
-        _powerText.text = value.ToString();
+        var powerTxt = $"Power:  {value.ToString()}";
+        _powerText.text = powerTxt.ToString();
     }
 
     private void UpdateViewHealth(int value)
     {
-        _speedText.text = value.ToString();
+        var healthTxt = $"health:  {value.ToString()}";
+        _speedText.text = healthTxt.ToString();
     }
 }
