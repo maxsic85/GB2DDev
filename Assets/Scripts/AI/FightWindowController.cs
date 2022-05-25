@@ -37,12 +37,14 @@ public class FightWindowController : BaseController
     {
         _enemy = new Enemy("Enemy Flappy");
         _money = _profilePlayer.PlayerMoney;
+
+
         _money.Attach(_enemy);
         _heath = _profilePlayer.PlayerHealth;
         _heath.Attach(_enemy);
         _force = _profilePlayer.PlayerForce;
         _force.Attach(_enemy);
-        _banditizm = _profilePlayer.PlayerBanditizm;
+        _banditizm = _profilePlayer.PlayerBandetry;
         _banditizm.Attach(_enemy);
         SubscribeButtons();
     }
@@ -70,25 +72,28 @@ public class FightWindowController : BaseController
     {
         if (isAddCount)
         {
-            _profilePlayer.PlayerBanditizm.Banditizm++;
-            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButtonAction?.Invoke();
+            _profilePlayer.PlayerBandetry.Bandentry++;
+            if (_profilePlayer.PlayerBandetry.Bandentry > 2) _fightWindow.ShowPassButtonAction?.Invoke();
         }
         else
         {
-            _profilePlayer.PlayerBanditizm.Banditizm--;
+            _profilePlayer.PlayerBandetry.Bandentry--;
         }
-        ChangeDataWindow(_profilePlayer.PlayerBanditizm.Banditizm, DataType.Banditizm);
+        ChangeDataWindow(_profilePlayer.PlayerBandetry.Bandentry, DataType.Banditizm);
     }
     private void ChangeMoney(bool isAddCount)
     {
         if (isAddCount)
-        { 
+        {
             _profilePlayer.PlayerMoney.Money++;
-        
-        _profilePlayer.CurrenMoney.Value++;
+
+         //   _profilePlayer.CurrenMoney.Value++;
         }
         else
+        { 
             _profilePlayer.PlayerMoney.Money--;
+           // _profilePlayer.CurrenMoney.Value--;
+        }
         ChangeDataWindow(_profilePlayer.PlayerMoney.Money, DataType.Money);
     }
     private void ChangeHealth(bool isAddCount)
@@ -140,7 +145,7 @@ public class FightWindowController : BaseController
                 break;
             case DataType.Banditizm:
                 _fightWindow.CountBanditizmPlayerText.text = $"Player Banditizmo {countChangeData.ToString()}";
-                _banditizm.Banditizm = countChangeData;
+                _banditizm.Bandentry = countChangeData;
                 break;
         }
         _fightWindow.CountPowerEnemyText.text = $"Enemy Power {_enemy.Power}";

@@ -64,7 +64,7 @@ public abstract class DataPlayer
         }
     }
 
-    public int Banditizm
+    public int Bandentry
     {
         get => _banditizm;
         set

@@ -34,6 +34,8 @@ List<AsyncOperationHandle<GameObject>>();
 
         _carview = LoadView(placeForUi);
         _carview.Init(profilePlayer);
+   
+
     }
 
     //private void ShowRewards()
@@ -69,7 +71,7 @@ List<AsyncOperationHandle<GameObject>>();
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
-        _profilePlayer.CurrenMoney.Value = _profilePlayer.PlayerMoney.Money;
+     //   _profilePlayer.CurrenMoney.Value = _profilePlayer.PlayerMoney.Money;
         _adsShower.ShowInterstitial();
         _profilePlayer.AnalyticTools.SendMessage("start_game");
     }

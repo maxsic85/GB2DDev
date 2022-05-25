@@ -29,7 +29,7 @@ class Enemy : IEnemy
                 _powerPlayer = dataPlayer.Power;
                 break;
             case DataType.Banditizm:
-                _banditizmPlayer = dataPlayer.Banditizm;
+                _banditizmPlayer = dataPlayer.Bandentry;
                 break;
         }
         Debug.Log($"Notified {_name} change to {dataPlayer}");
