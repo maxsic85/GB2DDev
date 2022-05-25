@@ -1,4 +1,5 @@
 using Profile;
+using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -16,21 +17,41 @@ public class CarInfoView : MonoBehaviour
     public TextMeshProUGUI PowerText { get => _powerText; set => _powerText = value; }
     public TextMeshProUGUI BanditryText { get => _banditryText; set => _banditryText = value; }
 
-    public void UpdateViewMoney(DataPlayer dataPlayer)
-    {
-        StringBuilder sb = new StringBuilder();
-
-        _moneyText.text = dataPlayer.Money.ToString();
-        _speedText.text = dataPlayer.Health.ToString();
-        _powerText.text = dataPlayer.Power.ToString();
-        _banditryText.text = dataPlayer.Bandentry.ToString();
-
-    }
 
     public void Init(ProfilePlayer dataPlayer)
     {
-        UpdateViewMoney(dataPlayer.CurrenProfile.Value);
-        dataPlayer.CurrenProfile.SubscribeOnChange(UpdateViewMoney);
+        UpdateViewMoney(dataPlayer.CurrenMoney.Value);
+        dataPlayer.CurrenMoney.SubscribeOnChange(UpdateViewMoney);
+
+        UpdateViewHealth(dataPlayer.CurrenHealth.Value);
+        dataPlayer.CurrenHealth.SubscribeOnChange(UpdateViewHealth);
+
+        UpdateViewPower(dataPlayer.CurrenPower.Value);
+        dataPlayer.CurrenPower.SubscribeOnChange(UpdateViewPower);
+
+        UpdateViewBandetry(dataPlayer.CurrenBandetry.Value);
+        dataPlayer.CurrenBandetry.SubscribeOnChange(UpdateViewBandetry);
+    }
+    public void UpdateViewMoney(int money)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        _moneyText.text = money.ToString();
+
     }
 
+    private void UpdateViewBandetry(int value)
+    {
+        _banditryText.text = value.ToString();
+    }
+
+    private void UpdateViewPower(int value)
+    {
+        _powerText.text = value.ToString();
+    }
+
+    private void UpdateViewHealth(int value)
+    {
+        _speedText.text = value.ToString();
+    }
 }

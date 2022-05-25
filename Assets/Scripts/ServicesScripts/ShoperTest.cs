@@ -8,9 +8,7 @@ public class ShoperTest : MonoBehaviour
     {
         Debug.Log($"item- {GetComponent<IAPButton>().productId} was buy ");
         _data.TryGetComponent<Root>(out Root root);
-        root.ProfilePlayer.CurrenProfile.Value.Money += grade;
-     //   root.ProfilePlayer.CurrenMoney.Value += grade;
-
+        root.ProfilePlayer.CurrenMoney.Value += grade;
     }
 
     public void GetBuyError()
