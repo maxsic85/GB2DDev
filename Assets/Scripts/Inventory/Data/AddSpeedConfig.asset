@@ -15,3 +15,4 @@ MonoBehaviour:
   itemConfig: {fileID: 11400000, guid: 89cd8a541f2e1244da036acba8e40986, type: 2}
   type: 1
   value: 100
+  price: 25

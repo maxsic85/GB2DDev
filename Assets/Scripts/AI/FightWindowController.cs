@@ -49,7 +49,7 @@ public class FightWindowController : BaseController
         _fightWindow.AddHealthButton.onClick.AddListener(() => ChangeHealth(true));
         _fightWindow.MinusHealthButton.onClick.AddListener(() => ChangeHealth(false));
         _fightWindow.AddPowerButton.onClick.AddListener(() => ChangePower(true));
-        _fightWindow.MinusPowerButton.onClick.AddListener(() =>ChangeBanditizm(false));
+        _fightWindow.MinusPowerButton.onClick.AddListener(() => ChangePower(false));
         _fightWindow.AddPBanditizmButton.onClick.AddListener(() => ChangeBanditizm(true));
         _fightWindow.MinusBanditizmButton.onClick.AddListener(() => ChangeBanditizm(false));
     

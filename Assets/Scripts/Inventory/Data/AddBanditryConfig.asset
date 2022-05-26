@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: AddBanditryConfig
   m_EditorClassIdentifier: 
   itemConfig: {fileID: 11400000, guid: bbfb8a60d89ceaa4082510383b7ef1a8, type: 2}
+  type: 3
   value: 2
   price: 5
