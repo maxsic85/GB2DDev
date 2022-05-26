@@ -1,10 +1,10 @@
 ﻿public class BandetryUpgrateHandler : IUpgradeCarHandler
 {
     #region Fields
-    private readonly float _bandetry;
+    private readonly int _bandetry;
     #endregion
     #region Life cycle
-    public BandetryUpgrateHandler(float bandetry)
+    public BandetryUpgrateHandler(int bandetry)
     {
         _bandetry = bandetry;
     }

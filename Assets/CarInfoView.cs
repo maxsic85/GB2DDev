@@ -25,18 +25,26 @@ public class CarInfoView : MonoBehaviour
     {
         UpdateViewMoney(dataPlayer.CurrenMoney.Value);
         dataPlayer.CurrenMoney.SubscribeOnChange(UpdateViewMoney);
+     
 
         UpdateViewHealth(dataPlayer.CurrenHealth.Value);
         dataPlayer.CurrenHealth.SubscribeOnChange(UpdateViewHealth);
+        dataPlayer.CurrentCar.Health = dataPlayer.CurrenHealth.Value;
 
         UpdateViewPower(dataPlayer.CurrenPower.Value);
         dataPlayer.CurrenPower.SubscribeOnChange(UpdateViewPower);
+        dataPlayer.CurrentCar.Power = dataPlayer.CurrenPower.Value;
+
 
         UpdateViewBandetry(dataPlayer.CurrenBandetry.Value);
         dataPlayer.CurrenBandetry.SubscribeOnChange(UpdateViewBandetry);
+        dataPlayer.CurrentCar.Bandetry = dataPlayer.CurrenBandetry.Value;
+
 
         UpdateViewSpeed(dataPlayer.CurrenSpeed.Value);
         dataPlayer.CurrenSpeed.SubscribeOnChange(UpdateViewSpeed);
+        dataPlayer.CurrentCar.Speed = dataPlayer.CurrenSpeed.Value;
+
     }
     public void UpdateViewMoney(int money)
     {

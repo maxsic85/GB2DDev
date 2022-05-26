@@ -7,15 +7,7 @@ public class FightWindowView : MonoBehaviour
     public Action ShowPassButtonAction;
 
     [SerializeField]
-    private TMP_Text _countMoneyText;
-    [SerializeField]
-    private TMP_Text _countHealthText;
-    [SerializeField]
-    private TMP_Text _countPowerText;
-    [SerializeField]
     private TMP_Text _countPowerEnemyText;
-    [SerializeField]
-    private TMP_Text _banditizmPlayerText;
     [SerializeField]
     private Button _addCoinsButton;
     [SerializeField]
@@ -42,10 +34,6 @@ public class FightWindowView : MonoBehaviour
     [SerializeField]
     private Button _leaveButton;
 
-
-    public TMP_Text CountMoneyText => _countMoneyText;
-    public TMP_Text CountHealthText => _countHealthText;
-    public TMP_Text CountPowerText => _countPowerText;
     public TMP_Text CountPowerEnemyText => _countPowerEnemyText;
     public Button AddCoinsButton => _addCoinsButton;
     public Button MinusCoinsButton => _minusCoinsButton;
@@ -55,8 +43,6 @@ public class FightWindowView : MonoBehaviour
     public Button MinusPowerButton => _minusPowerButton;
     public Button FightButton => _fightButton;
     public Button LeaveFightButton => _leaveButton;
-
-    public TMP_Text CountBanditizmPlayerText => _banditizmPlayerText;
     public Button AddPBanditizmButton => _addPBanditizmButton;
     public Button MinusBanditizmButton => _minusBanditizmButton;
     public Button PassButton => _passButton;

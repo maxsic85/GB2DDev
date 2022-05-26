@@ -5,7 +5,7 @@ public class UpgradeItemConfig : ScriptableObject
 {
     public ItemConfig itemConfig;
     private UpgradeType type;
-    public float value;
+    public int value;
     public int price;
 
     public int Id => itemConfig.id;

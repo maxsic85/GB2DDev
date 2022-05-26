@@ -1,10 +1,10 @@
 ﻿public class PowerUpgrateHandler : IUpgradeCarHandler
 {
     #region Fields
-    private readonly float _power;
+    private readonly int _power;
     #endregion
     #region Life cycle
-    public PowerUpgrateHandler(float power)
+    public PowerUpgrateHandler(int power)
     {
         _power = power;
     }

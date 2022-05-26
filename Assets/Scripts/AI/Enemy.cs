@@ -3,7 +3,7 @@
 class Enemy : IEnemy
 {
     private const int KCoins = 5;
-    private const float KPower = 1.5f;
+    private const float KPower =2f;
     private const int MaxHealthPlayer = 20;
     private string _name;
     private int _moneyPlayer;
@@ -40,7 +40,7 @@ class Enemy : IEnemy
         {
             var kHealth = _healthPlayer > MaxHealthPlayer ? 100 : 5;
            
-            var power = (int)(_moneyPlayer /  + kHealth + _powerPlayer / KPower);
+            var power =1+(int)((_moneyPlayer /  kHealth) + (_powerPlayer / KPower));
             return power;
         }
     }

@@ -28,7 +28,7 @@ namespace Profile
             CurrenBandetry = new SubscriptionProperty<int>();
             CurrenBandetry.Value = this.PlayerBandetry.Bandentry;
 
-            CurrentCar = new Car(CurrenSpeed.Value);
+            CurrentCar = new Car(CurrenSpeed.Value,CurrenHealth.Value,CurrenPower.Value,CurrenBandetry.Value);
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
         public SubscriptionProperty<int> CurrenMoney { get; }

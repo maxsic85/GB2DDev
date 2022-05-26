@@ -1,7 +1,8 @@
 ﻿public interface IUpgradableCar
 {
+    int Health { get; set; }
     float Speed { get; set; }
-    float Power { get; set; }
-    float Bandetry { get; set; }
+    int Power { get; set; }
+    int Bandetry { get; set; }
     void Restore();
 }
