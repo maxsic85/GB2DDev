@@ -27,23 +27,23 @@ public class CarInfoView : MonoBehaviour
         dataPlayer.CurrenMoney.SubscribeOnChange(UpdateViewMoney);
      
 
-        UpdateViewHealth(dataPlayer.CurrenHealth.Value);
-        dataPlayer.CurrenHealth.SubscribeOnChange(UpdateViewHealth);
-        dataPlayer.CurrentCar.Health = dataPlayer.CurrenHealth.Value;
+        UpdateViewHealth(dataPlayer.CurrentCar.CurrenHealth.Value);
+        dataPlayer.CurrentCar.CurrenHealth.SubscribeOnChange(UpdateViewHealth);
+        dataPlayer.CurrentCar.Health = dataPlayer.CurrentCar.CurrenHealth.Value;
 
-        UpdateViewPower(dataPlayer.CurrenPower.Value);
-        dataPlayer.CurrenPower.SubscribeOnChange(UpdateViewPower);
-        dataPlayer.CurrentCar.Power = dataPlayer.CurrenPower.Value;
-
-
-        UpdateViewBandetry(dataPlayer.CurrenBandetry.Value);
-        dataPlayer.CurrenBandetry.SubscribeOnChange(UpdateViewBandetry);
-        dataPlayer.CurrentCar.Bandetry = dataPlayer.CurrenBandetry.Value;
+        UpdateViewPower(dataPlayer.CurrentCar.CurrenPower.Value);
+        dataPlayer.CurrentCar.CurrenPower.SubscribeOnChange(UpdateViewPower);
+        dataPlayer.CurrentCar.Power = dataPlayer.CurrentCar.CurrenPower.Value;
 
 
-        UpdateViewSpeed(dataPlayer.CurrenSpeed.Value);
-        dataPlayer.CurrenSpeed.SubscribeOnChange(UpdateViewSpeed);
-        dataPlayer.CurrentCar.Speed = dataPlayer.CurrenSpeed.Value;
+        UpdateViewBandetry(dataPlayer.CurrentCar.CurrenBandetry.Value);
+        dataPlayer.CurrentCar.CurrenBandetry.SubscribeOnChange(UpdateViewBandetry);
+        dataPlayer.CurrentCar.Bandetry = dataPlayer.CurrentCar.CurrenBandetry.Value;
+
+
+        UpdateViewSpeed(dataPlayer.CurrentCar.CurrenSpeed.Value);
+        dataPlayer.CurrentCar.CurrenSpeed.SubscribeOnChange(UpdateViewSpeed);
+        dataPlayer.CurrentCar.Speed = dataPlayer.CurrentCar.CurrenSpeed.Value;
 
     }
     public void UpdateViewMoney(int money)

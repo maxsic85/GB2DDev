@@ -1,4 +1,6 @@
-﻿public class Car : IUpgradableCar
+﻿using Tools;
+
+public class Car : IUpgradableCar
 {
     private readonly int _defaulHealth;
     private readonly float _defaultSpeed;
@@ -13,14 +15,28 @@
         _defaultPower = power;
         _defaultBandetry = bandetry;
 
+        CurrenSpeed = new SubscriptionProperty<float>();
+        CurrenSpeed.Value = _defaultSpeed;
+        CurrenHealth = new SubscriptionProperty<int>();
+        CurrenHealth.Value = _defaulHealth;
+        CurrenPower = new SubscriptionProperty<int>();
+        CurrenPower.Value = _defaultPower;
+        CurrenBandetry = new SubscriptionProperty<int>();
+        CurrenBandetry.Value = _defaultBandetry;
+
         Restore();
     }
 
+    public SubscriptionProperty<float> CurrenSpeed { get; set; }
+    public SubscriptionProperty<int> CurrenHealth { get; set; }
+    public SubscriptionProperty<int> CurrenPower { get; set; }
+    public SubscriptionProperty<int> CurrenBandetry { get; set; }
+
     #region IUpgradableCar
-    public int Health { get; set; }
-    public float Speed { get; set; }
-    public int Power { get; set; }
-    public int Bandetry { get; set; }
+    public int Health { get { return CurrenHealth.Value; } set { CurrenHealth.Value = value; } }
+    public float Speed { get { return CurrenSpeed.Value; } set { CurrenSpeed.Value = value; } }
+    public int Power { get { return CurrenPower.Value; } set { CurrenPower.Value = value; } }
+    public int Bandetry { get { return CurrenBandetry.Value; } set { CurrenBandetry.Value = value; } }
 
     public void Restore()
     {

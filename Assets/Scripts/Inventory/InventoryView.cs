@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using  Mobile.Resourses.Path;
+using Profile;
 public class InventoryView : MonoBehaviour, IInventoryView
 {
     public event Action<IItem> Selected;
@@ -11,9 +12,11 @@ public class InventoryView : MonoBehaviour, IInventoryView
     private List<IItem> _itemInfoCollection;
     private List<GameObject> _itemsObjectsView=new List<GameObject>();
     private InventoryItemView _itemView;
+    private ProfilePlayer _playerProfile;
 
     public void Init(List<IItem> items)
     {
+        _playerProfile = FindObjectOfType<Root>().GetComponent<Root>().ProfilePlayer;
         _itemInfoCollection = new List<IItem>();
         _itemInfoCollection = items;
         foreach (var item in _itemInfoCollection)
@@ -44,6 +47,8 @@ public class InventoryView : MonoBehaviour, IInventoryView
     protected virtual void OnSelected(IItem e)
     {
         Debug.Log(e.Info.Title);
+
+
     }
     protected virtual void OnDeselected(IItem e)
     {

@@ -24,12 +24,13 @@ public class InventoryController : BaseController, IInventoryController
 
     public void HideInventory()
     {
-        _inventoryWindowView.Display();
+     //   _inventoryWindowView.Display();
     }
 
     public void ShowInventory(Action callback)
     {
         _inventoryWindowView.Display();
+        callback.Invoke();
     }
 
     //private void SetupView(IInventoryView inventoryView)
@@ -44,12 +45,12 @@ public class InventoryController : BaseController, IInventoryController
     //    _inventoryWindowView.Selected -= OnItemSelected;
     //    _inventoryWindowView.Selected -= OnItemDeselected;
     //}
-    //private void OnItemSelected(object sender, IItem item)
-    //{
-    //    _inventoryModel.EquipItem(item);
-    //}
-    //private void OnItemDeselected(object sender, IItem item)
-    //{
-    //    _inventoryModel.UnequipItem(item);
-    //}
+    private void OnItemSelected(object sender, IItem item)
+    {
+        _inventoryModel.EquipItem(item);
+    }
+    private void OnItemDeselected(object sender, IItem item)
+    {
+        _inventoryModel.UnequipItem(item);
+    }
 }

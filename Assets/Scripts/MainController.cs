@@ -57,6 +57,7 @@ public sealed class MainController : BaseController
         if (_shedController == null)
             _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer.CurrentCar, _placeForUi, _inventoryModel);
         AddController(_shedController);
+       
     }
 
     private CarInfoView LoadCarInfoView(Transform placeForUi)

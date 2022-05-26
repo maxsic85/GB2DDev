@@ -66,14 +66,14 @@ public class FightWindowController : BaseController
     {
         if (isAddCount)
         {
-            _profilePlayer.CurrenBandetry.Value++;
-            if (_profilePlayer.CurrenBandetry.Value > 2) _fightWindow.ShowPassButtonAction?.Invoke();
+            _profilePlayer.CurrentCar.CurrenBandetry.Value++;
+            if (_profilePlayer.CurrentCar.CurrenBandetry.Value > 2) _fightWindow.ShowPassButtonAction?.Invoke();
         }
         else
         {
             _profilePlayer.PlayerBandetry.Bandentry--;
         }
-        ChangeDataWindow(_profilePlayer.CurrenBandetry.Value, DataType.Banditizm);
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenBandetry.Value, DataType.Banditizm);
     }
     private void ChangeMoney(bool isAddCount)
     {
@@ -90,22 +90,22 @@ public class FightWindowController : BaseController
     private void ChangeHealth(bool isAddCount)
     {
         if (isAddCount)
-            _profilePlayer.CurrenHealth.Value++;
+            _profilePlayer.CurrentCar.CurrenHealth.Value++;
         else
-            _profilePlayer.CurrenHealth.Value--;
-        ChangeDataWindow(_profilePlayer.CurrenHealth.Value, DataType.Health);
+            _profilePlayer.CurrentCar.CurrenHealth.Value--;
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenHealth.Value, DataType.Health);
     }
     private void ChangePower(bool isAddCount)
     {
         if (isAddCount)
-            _profilePlayer.CurrenPower.Value++;
+            _profilePlayer.CurrentCar.CurrenPower.Value++;
         else
-            _profilePlayer.CurrenPower.Value--;
-        ChangeDataWindow(_profilePlayer.CurrenPower.Value, DataType.Power);
+            _profilePlayer.CurrentCar.CurrenPower.Value--;
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenPower.Value, DataType.Power);
     }
     private void Fight()
     {
-        Debug.Log(_profilePlayer.CurrenPower.Value >= _enemy.Power
+        Debug.Log(_profilePlayer.CurrentCar.CurrenPower.Value >= _enemy.Power
         ? "<color=#07FF00>Win!!!</color>"
         : "<color=#FF0000>Lose!!!</color>");
     }

@@ -19,23 +19,13 @@ namespace Profile
 
             CurrenMoney = new SubscriptionProperty<int>();
             CurrenMoney.Value = this.PlayerMoney.Money;
-            CurrenSpeed = new SubscriptionProperty<float>();
-            CurrenSpeed.Value = this.PlayerSpeed.Speed;
-            CurrenHealth = new SubscriptionProperty<int>();
-            CurrenHealth.Value = this.PlayerHealth.Health;
-            CurrenPower = new SubscriptionProperty<int>();
-            CurrenPower.Value = this.PlayerForce.Power;
-            CurrenBandetry = new SubscriptionProperty<int>();
-            CurrenBandetry.Value = this.PlayerBandetry.Bandentry;
+         
 
-            CurrentCar = new Car(CurrenSpeed.Value,CurrenHealth.Value,CurrenPower.Value,CurrenBandetry.Value);
+            CurrentCar = new Car(5,10,2,1);
         }
         public SubscriptionProperty<GameState> CurrentState { get; }
         public SubscriptionProperty<int> CurrenMoney { get; }
-        public SubscriptionProperty<float> CurrenSpeed { get; }
-        public SubscriptionProperty<int> CurrenHealth { get; }
-        public SubscriptionProperty<int> CurrenPower { get; }
-        public SubscriptionProperty<int> CurrenBandetry { get; }
+
 
         public Car CurrentCar { get; }
         public IAnalyticTools AnalyticTools { get; }
