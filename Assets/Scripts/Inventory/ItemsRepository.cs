@@ -32,6 +32,7 @@ public class ItemsRepository : BaseController, IItemsRepository
         return new Item
         {
             Id = config.itemConfig.id,
+            Locked=true,
             Info = new ItemInfo { Title = config.itemConfig.title,Value=config.value,Price=config.price, Sprite=config.itemConfig.image, UpgradeType=config.UpgrtType }
         };
     }

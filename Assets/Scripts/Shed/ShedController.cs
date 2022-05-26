@@ -37,10 +37,10 @@ public class ShedController : BaseController, IShedController
     public void EnterToShed()
     {
         _inventoryController.ShowInventory(ExitFromShed);
+        Debug.Log($"Enter: car has speed : {_car.Speed}");
     }
     public void ExitFromShed()
     {
-        Debug.Log($"Exit: car has speed : {_car.Speed}");
         var equipItems = _upgradeItemsRepository.Items.Values.ToList();
         UpgradeCarWithEquippedItems(_car, equipItems, _upgradeHandlersRepository.UpgradeItems);
         Debug.Log($"Exit: car has speed : {_car.Speed}");
@@ -56,6 +56,7 @@ public class ShedController : BaseController, IShedController
         {
             if (upgradeHandlers.TryGetValue(equippedItem.Id, out var handler))
             {
+                if(equippedItem.Locked==false)
                 handler.Upgrade(upgradableCar);
             }
         }

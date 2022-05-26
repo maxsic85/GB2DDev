@@ -47,6 +47,9 @@ public class InventoryView : MonoBehaviour, IInventoryView
     protected virtual void OnSelected(IItem e)
     {
         Debug.Log(e.Info.Title);
+        Debug.Log(e.Locked);
+
+        e.Locked = false;
 
 
     }

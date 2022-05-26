@@ -25,7 +25,7 @@ public class UpgradeHandlersRepository : BaseController
         foreach (var config in configs.itemConfigs)
         {
             if (upgradeHandlersMapByType.ContainsKey(config.Id)) continue;
-            upgradeHandlersMapByType.Add(config.Id, CreateHandlerByType(config));
+                     upgradeHandlersMapByType.Add(config.Id, CreateHandlerByType(config));
         }
     }
     private IUpgradeCarHandler CreateHandlerByType(UpgradeItemConfig config)

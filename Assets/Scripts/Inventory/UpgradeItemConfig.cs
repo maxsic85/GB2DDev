@@ -4,7 +4,7 @@ using UnityEngine;
 public class UpgradeItemConfig : ScriptableObject
 {
     public ItemConfig itemConfig;
-    private UpgradeType type;
+ [SerializeField]   private UpgradeType type;
     public int value;
     public int price;
 
