@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class DailyRewardController:BaseController
 {
@@ -10,11 +11,27 @@ public class DailyRewardController:BaseController
     private CurrencyController _currencyController;
 
     private bool _isGetReward;
-    public DailyRewardController(DailyRewardView generateLevelView,Transform transformUi, CurrencyView currencyView)
+    public DailyRewardController(AssetReference generateLevelView,Transform transformUi, AssetReference currencyView)
     {
-        _dailyRewardView = GameObject.Instantiate(generateLevelView, transformUi);
+        LoadView(generateLevelView, transformUi);
+
+     //  _dailyRewardView = GameObject.Instantiate(generateLevelView, transformUi);
         _currencyController = new CurrencyController(currencyView,transformUi);
     }
+
+
+    private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
+    {
+        var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
+        if (addressablePrefab != null)
+        {
+
+            _dailyRewardView = addressablePrefab.gameObject.GetComponent<DailyRewardView>();
+            RefreshView();
+
+        }
+    }
+
     public void RefreshView()
     {
         InitSlots();

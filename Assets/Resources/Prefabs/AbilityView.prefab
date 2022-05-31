@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 6561149047537600551}
   - component: {fileID: 8131185326222509798}
   - component: {fileID: 1762920231548324741}
+  - component: {fileID: 3002254830770272047}
   m_Layer: 0
   m_Name: AbilityItemView
   m_TagString: Untagged
@@ -936,6 +937,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 6561149047537600551}
+--- !u!114 &3002254830770272047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156968204914795061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdb0fbef99642841af1641a62a84199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadPrefab:
+    m_AssetGUID: b9db8a1cd0ed5964fa0dba4fe4524cbb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _mountSpawnTransform: {fileID: 5451956759302683276}
+  _loadAsssetsButton: {fileID: 6561149047537600551}
+  _spawnAssetsButton: {fileID: 7047496427972163218}
 --- !u!1 &8224007002071363533
 GameObject:
   m_ObjectHideFlags: 0

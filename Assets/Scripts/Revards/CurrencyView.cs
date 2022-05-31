@@ -27,6 +27,7 @@ public class CurrencyView : MonoBehaviour
     private void Start()
     {
         RefreshText();
+        gameObject.transform.SetAsLastSibling();
     }
     public void AddWood(int value)
     {

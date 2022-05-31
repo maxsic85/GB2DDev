@@ -1,5 +1,6 @@
 ﻿using Profile;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class FightWindowController : BaseController
 {
@@ -12,10 +13,25 @@ public class FightWindowController : BaseController
     private Banditizm _banditizm;
     private Enemy _enemy;
 
-    public FightWindowController(Transform transformForUI, FightWindowView fightWindow, ProfilePlayer profilePlayer)
+    public FightWindowController(AssetReference fightWindow,Transform transformForUI, ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
-        _fightWindow = GameObject.Instantiate(fightWindow, transformForUI);
+        LoadView(fightWindow,transformForUI);
+     //   _fightWindow = GameObject.Instantiate(fightWindow, transformForUI);
+    }
+
+    private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
+    {
+        var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
+        if (addressablePrefab != null)
+        {
+
+            _fightWindow = addressablePrefab.gameObject.GetComponent<FightWindowView>();
+            RefreshView();
+          
+
+
+        }
     }
     public void RefreshView()
     {
@@ -44,13 +60,18 @@ public class FightWindowController : BaseController
         _fightWindow.PassButton.onClick.AddListener(Pass);
         _fightWindow.FightButton.onClick.AddListener(Fight);
         _fightWindow.LeaveFightButton.onClick.AddListener(CloseWindow);
+
+        _fightWindow.ShowPassButtonAction += OnShowPassButton;
+   
+
+
     }
     private void ChangeBanditizm(bool isAddCount)
     {
         if (isAddCount)
         {
             _profilePlayer.PlayerBanditizm.Banditizm++;
-            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButton?.Invoke();
+            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButtonAction?.Invoke();
         }
         else
         {
@@ -95,7 +116,7 @@ public class FightWindowController : BaseController
 
     private void OnShowPassButton()
     {
-        _fightWindow.PassButton.gameObject.SetActive(false);
+        _fightWindow.PassButton.gameObject.SetActive(true);
     }
     private void ChangeDataWindow(int countChangeData, DataType dataType)
     {
@@ -123,6 +144,7 @@ public class FightWindowController : BaseController
 
     private void CloseWindow()
     {
+        GameObject.Destroy(_fightWindow.gameObject);
         _profilePlayer.CurrentState.Value = GameState.Game;
     }
     protected override void OnChildDispose()
@@ -136,6 +158,8 @@ public class FightWindowController : BaseController
         _fightWindow.FightButton.onClick.RemoveAllListeners();
         _fightWindow.AddPBanditizmButton.onClick.RemoveAllListeners();
         _fightWindow.MinusBanditizmButton.onClick.RemoveAllListeners();
+        _fightWindow.LeaveFightButton.onClick.RemoveAllListeners();
+        _fightWindow.ShowPassButtonAction -= OnShowPassButton;
         _money.Detach(_enemy);
         _heath.Detach(_enemy);
         _force.Detach(_enemy);
