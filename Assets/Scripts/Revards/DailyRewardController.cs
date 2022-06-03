@@ -14,8 +14,6 @@ public class DailyRewardController:BaseController
     public DailyRewardController(AssetReference generateLevelView,Transform transformUi, AssetReference currencyView)
     {
         LoadView(generateLevelView, transformUi);
-
-     //  _dailyRewardView = GameObject.Instantiate(generateLevelView, transformUi);
         _currencyController = new CurrencyController(currencyView,transformUi);
     }
 

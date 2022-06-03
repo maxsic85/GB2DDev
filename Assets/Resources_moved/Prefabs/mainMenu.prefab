@@ -125,7 +125,7 @@ RectTransform:
   m_Children:
   - {fileID: 2745927842487783890}
   m_Father: {fileID: 629988152233154434}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -829,7 +829,7 @@ RectTransform:
   m_Children:
   - {fileID: 8352943155791136394}
   m_Father: {fileID: 629988152233154434}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1255,11 +1255,13 @@ MonoBehaviour:
   - {fileID: 8343229121973092363}
   - {fileID: 7401895545653230848}
   - {fileID: 148689320906119671}
+  - {fileID: 2272627182901010664}
   _localisationEntriesKey:
   - start_game
   - to_shed
   - to_rewards
   - exit
+  - start_battle
   _russianButton: {fileID: 1963449742008109132}
   _englishButton: {fileID: 136118802121477083}
   _frenchButton: {fileID: 893652422162164391}
@@ -1864,10 +1866,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1318141628163850594}
+  - {fileID: 6316870795221389649}
   - {fileID: 317853508904941824}
   - {fileID: 3650687376275398741}
   - {fileID: 5685708124724103499}
-  - {fileID: 6316870795221389649}
   m_Father: {fileID: 390487919442932778}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1944,7 +1946,7 @@ RectTransform:
   m_Children:
   - {fileID: 8886109145043909330}
   m_Father: {fileID: 629988152233154434}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2186,7 +2188,7 @@ RectTransform:
   m_Children:
   - {fileID: 4776334414662235379}
   m_Father: {fileID: 629988152233154434}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

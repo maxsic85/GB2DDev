@@ -39,9 +39,6 @@ public class Root : MonoBehaviour
        
     }
 
-
-   
-
     protected void OnDestroy()
     {
         _mainController?.Dispose();

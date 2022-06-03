@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -27,12 +28,19 @@ public class LoadWindowView : MonoBehaviour
             Addressables.ReleaseInstance(addressablePrefab);
         _addressablePrefabs.Clear();
     }
- 
-    private void CreateAddressablesPrefab()
+
+    private async void CreateAddressablesPrefab()
     {
-        var addressablePrefab = Addressables.InstantiateAsync(_loadPrefab,
-        _mountSpawnTransform);
-        _addressablePrefabs.Add(addressablePrefab);
+        var addressablePrefab = await Addressables.InstantiateAsync(_loadPrefab, _mountSpawnTransform).Task;
+        if (addressablePrefab != null)
+        {
+            //_addressablePrefabs.Add(addressablePrefab);
+            addressablePrefab.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right);
+        }
+
+
+
+
 
     }
 }
