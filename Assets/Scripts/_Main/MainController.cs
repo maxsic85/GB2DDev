@@ -4,23 +4,20 @@ using System.Collections.Generic;
 using Tools;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-
 public sealed class MainController : BaseController
 {
+    #region Fields
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
     private InventoryModel _inventoryModel;
     private DailyRewardController _dailyRewardController;
     private FightWindowController _fightWindowController;
-    private CurrencyController _currencyController;
     private StartFightController _startFightController;
-
     private AssetReference _dailyRewardView;
     private AssetReference _currencyView;
     private AssetReference _fightWindowView;
     private CarInfoView  _carInfoView;
-
 
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -28,6 +25,8 @@ public sealed class MainController : BaseController
     private readonly UpgradeItemConfigDataSource _upgradeItemConfigs;
     private readonly List<AbilityItemConfig> _abilityItemConfigs;
     private readonly AssetReference _loadPrefabmainMenuView;
+    #endregion
+    #region Life cycle
     public MainController(Transform placeForUi,
                         ProfilePlayer profilePlayer,
                         IAdsShower adsShower,
@@ -105,7 +104,8 @@ public sealed class MainController : BaseController
                 break;
         }
     }
-
+    #endregion
+    #region IDisposable
     private void DisposeAllControllers()
     {
         _mainMenuController?.Dispose();
@@ -123,4 +123,5 @@ public sealed class MainController : BaseController
         _profilePlayer.CurrentState.UnSubscriptionOnChange(OnChangeGameState);
         base.OnChildDispose();
     }
+    #endregion
 }

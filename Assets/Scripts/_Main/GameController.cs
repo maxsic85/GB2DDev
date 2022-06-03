@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameController : BaseController
 {
+    #region Life cycle
     public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel model, Transform root)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
@@ -17,14 +18,7 @@ public class GameController : BaseController
         var gameInputType = InputType.SWIPE;
         var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar, gameInputType);
         AddController(inputGameController);
-            
-      
-
-      
-
-    
-
-
     }
+    #endregion
 }
 

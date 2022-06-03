@@ -9,18 +9,17 @@ using Mobile.Resourses.Path;
 
 public class MainMenuController : BaseController
 {
+    #region Fields
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
     private MainMenuView _view;
     private CarInfoView _carview;
-
     private readonly TileRenderView _tileView;
-
     private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new
 List<AsyncOperationHandle<GameObject>>();
-
-
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab,CarInfoView carInfoView)
+    #endregion
+    #region Life cycle
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, AssetReference loadPrefab, CarInfoView carInfoView)
     {
         _profilePlayer = profilePlayer;
         _adsShower = adsShower;
@@ -30,7 +29,7 @@ List<AsyncOperationHandle<GameObject>>();
 
         _carview = carInfoView;
         _carview.Init(profilePlayer);
-   
+
 
     }
     private TileRenderView LoadTileRender(Transform placeForUi)
@@ -39,7 +38,7 @@ List<AsyncOperationHandle<GameObject>>();
         AddGameObjects(objectView);
         return objectView.GetComponent<TileRenderView>();
     }
-   
+
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
     {
         var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
@@ -73,7 +72,8 @@ List<AsyncOperationHandle<GameObject>>();
     {
         _profilePlayer.CurrentState.Value = GameState.Shed;
     }
-
+    #endregion
+    #region IDisposable
     protected override void OnChildDispose()
     {
         foreach (var addressablePrefab in _addressablePrefabs)
@@ -81,5 +81,6 @@ List<AsyncOperationHandle<GameObject>>();
         _addressablePrefabs.Clear();
         base.OnChildDispose();
     }
+    #endregion
 }
 

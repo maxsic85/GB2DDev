@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class MainMenuView : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private CustomButton _buttonStart;
     [SerializeField] private CustomButton _buttonStartBattle;
     [SerializeField] private CustomButton _buttonInventory;
     [SerializeField] private CustomButton _buttonReward;
     [SerializeField] private CustomButton _buttonExit;
-
-
-
-
-    public void Init(UnityAction startGame, UnityAction startBattle , UnityAction showInventoryAction, UnityAction watchReward)
+    #endregion
+    #region Life cycle
+    public void Init(UnityAction startGame, UnityAction startBattle, UnityAction showInventoryAction, UnityAction watchReward)
     {
         _buttonStart.onClick.AddListener(startGame);
         _buttonStartBattle.onClick.AddListener(startBattle);
@@ -32,4 +30,5 @@ public class MainMenuView : MonoBehaviour
     {
         _buttonStart.onClick.RemoveAllListeners();
     }
+    #endregion
 }
