@@ -20,13 +20,10 @@ public class FightWindowView : MonoBehaviour
     private Button _addPowerButton;
     [SerializeField]
     private Button _minusPowerButton;
-
-
     [SerializeField]
     private Button _addPBanditizmButton;
     [SerializeField]
     private Button _minusBanditizmButton;
-
     [SerializeField]
     private Button _fightButton;
     [SerializeField]

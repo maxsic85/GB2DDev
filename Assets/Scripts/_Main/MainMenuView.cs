@@ -20,7 +20,6 @@ public class MainMenuView : MonoBehaviour
         _buttonExit.onClick.AddListener(ExitGame);
 
     }
-
     private void ExitGame()
     {
         Application.Quit();

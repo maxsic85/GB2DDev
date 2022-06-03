@@ -8,16 +8,17 @@ namespace CarInput
 {
     public class TouchInputView : BaseInputView
     {
+        #region Fields
         private float _tapAcceleration = 0.1f;
         private float _slowUpPerSecond = 0.5f;
-
+        #endregion
+        #region Life cycle
         public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed)
         {
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(OnUpdate);
             _speed = 0;
         }
-
         private void OnUpdate()
         {
             if (Input.touchCount > 0)
@@ -42,12 +43,10 @@ namespace CarInput
             Move();
             Slowdown();
         }
-
         private void AddAcceleration(float acc)
         {
             _speed = Mathf.Clamp(_speed + acc, -1f, 1f);
         }
-
         private void Move()
         {
             if (_speed < 0)
@@ -55,16 +54,15 @@ namespace CarInput
             else
                 OnRightMove(_speed);
         }
-
         private void Slowdown()
         {
             var sgn = Mathf.Sign(_speed);
             _speed = Mathf.Clamp01(Mathf.Abs(_speed) - _slowUpPerSecond * Time.deltaTime) * sgn;
         }
-
         void OnDestroy()
         {
             UpdateManager.UnsubscribeFromUpdate(OnUpdate);
         }
     }
+    #endregion
 }

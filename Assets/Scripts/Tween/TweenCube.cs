@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Renderer))]
 public class TweenCube : MonoBehaviour
 {
+    #region Fields
     [SerializeField]
     private float _duration;
     [SerializeField]
@@ -13,6 +14,8 @@ public class TweenCube : MonoBehaviour
     private float _positionX;
     [SerializeField]
     private float _endScale;
+    #endregion
+    #region Life cycle
     private void ComplexTween()
     {
         Sequence sequence = DOTween.Sequence();
@@ -26,6 +29,7 @@ public class TweenCube : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             ComplexTween();
     }
+    #endregion
 }
 
 

@@ -2,13 +2,14 @@
 
 public class Car : IUpgradableCar
 {
+    #region
     private readonly int _defaulHealth;
     private readonly float _defaultSpeed;
     private readonly int _defaultPower;
     private readonly int _defaultBandetry;
-
-
-    public Car(float speed,int health,int power,int bandetry)
+    #endregion
+    #region Life cycle
+    public Car(float speed, int health, int power, int bandetry)
     {
         _defaultSpeed = speed;
         _defaulHealth = health;
@@ -26,12 +27,11 @@ public class Car : IUpgradableCar
 
         Restore();
     }
-
     public SubscriptionProperty<float> CurrenSpeed { get; set; }
     public SubscriptionProperty<int> CurrenHealth { get; set; }
     public SubscriptionProperty<int> CurrenPower { get; set; }
     public SubscriptionProperty<int> CurrenBandetry { get; set; }
-
+    #endregion
     #region IUpgradableCar
     public int Health { get { return CurrenHealth.Value; } set { CurrenHealth.Value = value; } }
     public float Speed { get { return CurrenSpeed.Value; } set { CurrenSpeed.Value = value; } }

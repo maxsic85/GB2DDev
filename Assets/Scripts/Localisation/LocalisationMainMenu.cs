@@ -8,6 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 public class LocalisationMainMenu : MonoBehaviour
 {
+    #region Fields
     [SerializeField]
     private TMP_Text[] _changeText;
     [SerializeField]
@@ -18,6 +19,8 @@ public class LocalisationMainMenu : MonoBehaviour
     private Button _englishButton;
     [SerializeField]
     private Button _frenchButton;
+    #endregion
+    #region Life cycle
     private void Start()
     {
         ChangedLocaleEvent(null);
@@ -45,16 +48,16 @@ public class LocalisationMainMenu : MonoBehaviour
         for (int i = 0; i < _changeText.Length; i++)
         {
 
-        if (loadingOperation.Status == AsyncOperationStatus.Succeeded)
-        {
-            var table = loadingOperation.Result;
+            if (loadingOperation.Status == AsyncOperationStatus.Succeeded)
+            {
+                var table = loadingOperation.Result;
                 _changeText[i].text = table.GetEntry(_localisationEntriesKey[i])?.GetLocalizedString();
-        }
-        else
-        {
-            Debug.Log("Could not load String Table\n" +
-            loadingOperation.OperationException);
-        }
+            }
+            else
+            {
+                Debug.Log("Could not load String Table\n" +
+                loadingOperation.OperationException);
+            }
 
         }
     }
@@ -63,4 +66,5 @@ public class LocalisationMainMenu : MonoBehaviour
         LocalizationSettings.SelectedLocale =
         LocalizationSettings.AvailableLocales.Locales[index];
     }
+    #endregion
 }

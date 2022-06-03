@@ -2,9 +2,11 @@
 
 public class InventoryModel : IInventoryModel
 {
+    #region Fields
     private static readonly List<IItem> _emptyCollection = new List<IItem>();
     private readonly List<IItem> _items = new List<IItem>();
-    #region Methods
+    #endregion
+    #region Life cycle
     public IReadOnlyList<IItem> GetEquippedItems()
     {
         return _items ?? _emptyCollection;

@@ -11,12 +11,6 @@ namespace CarInput
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(Move);
         }
-
-        private void OnDestroy()
-        {
-            UpdateManager.UnsubscribeFromUpdate(Move);
-        }
-
         private void Move()
         {
             var direction = Vector3.zero;
@@ -27,6 +21,10 @@ namespace CarInput
                 direction.Normalize();
 
             OnRightMove(direction.sqrMagnitude / 20 * _speed);
+        }
+        private void OnDestroy()
+        {
+            UpdateManager.UnsubscribeFromUpdate(Move);
         }
     }
 }

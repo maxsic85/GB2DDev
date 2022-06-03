@@ -2,9 +2,11 @@
 
 public class UpgradeHandlersRepository : BaseController
 {
+    #region Field
     public IReadOnlyDictionary<int, IUpgradeCarHandler> UpgradeItems => _upgradeItemsMapById;
     private Dictionary<int, IUpgradeCarHandler> _upgradeItemsMapById = new Dictionary<int,
     IUpgradeCarHandler>();
+    #endregion
     #region Life cycle
     public UpgradeHandlersRepository(
    UpgradeItemConfigDataSource upgradeItemConfigs)

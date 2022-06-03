@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CurrencyView : MonoBehaviour
 {
+    #region Fields
     private const string WoodKey = nameof(WoodKey);
     private const string DiamondKey = nameof(DiamondKey);
     public static CurrencyView Instance;
@@ -10,6 +11,8 @@ public class CurrencyView : MonoBehaviour
     private TMP_Text _currentCountWood;
     [SerializeField]
     private TMP_Text _currentCountDiamond;
+#endregion
+    #region Life cycle
     private int Wood
     {
         get => PlayerPrefs.GetInt(WoodKey, 0);
@@ -44,4 +47,5 @@ public class CurrencyView : MonoBehaviour
         _currentCountWood.text = Wood.ToString();
         _currentCountDiamond.text = Diamonds.ToString();
     }
+    #endregion
 }

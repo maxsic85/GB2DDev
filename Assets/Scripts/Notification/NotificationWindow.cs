@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NotificationWindow : MonoBehaviour
 {
+    #region Fields
     private const string AndroidNotifierId = "android_notifier_id";
     [SerializeField]
     private Button _buttonNotification;
+    #endregion
+    #region Life cycle
     private void Start()
     {
         _buttonNotification.onClick.AddListener(CreateNotification);
-    }
-    private void OnDestroy()
-    {
-        _buttonNotification.onClick.RemoveAllListeners();
     }
     private void CreateNotification()
     {
@@ -51,6 +50,11 @@ public class NotificationWindow : MonoBehaviour
         ShowInForeground = false
         };
         iOSNotificationCenter.ScheduleNotification(iosSettingsNotification);
-        #endif
+#endif
     }
+    private void OnDestroy()
+    {
+        _buttonNotification.onClick.RemoveAllListeners();
+    }
+    #endregion
 }

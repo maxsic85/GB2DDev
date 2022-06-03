@@ -6,10 +6,12 @@ namespace CarInput
 {
     public sealed class TileRenderView : MonoBehaviour
     {
+        #region Field
         private Camera _camera;
         private TrailRenderer _trailRenderer;
         private float _currentTouchX;
-
+        #endregion
+        #region Life cycle
         public void Init(UnityAction startGame)
         {
             _camera = Camera.main;
@@ -17,12 +19,10 @@ namespace CarInput
             _trailRenderer.emitting = false;
             UpdateManager.SubscribeToUpdate(OnUpdate);
         }
-
         private void OnUpdate()
         {
             CreateTileRender();
         }
-
         private void CreateTileRender()
         {
             if (Input.touchCount > 0)
@@ -61,15 +61,14 @@ namespace CarInput
                 }
             }
         }
-
         internal void Init(System.Action startGame, object dailyRewardGame)
         {
             throw new System.NotImplementedException();
         }
-
         private void OnDestroy()
         {
             UpdateManager.UnsubscribeFromUpdate(OnUpdate);
         }
     }
+    #endregion
 }

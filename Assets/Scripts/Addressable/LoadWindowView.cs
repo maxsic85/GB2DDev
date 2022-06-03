@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
-
-
 public class LoadWindowView : MonoBehaviour
 {
+    #region Field
     [SerializeField]
     private AssetReference _loadPrefab;
     [SerializeField]
@@ -17,6 +15,8 @@ public class LoadWindowView : MonoBehaviour
     [SerializeField]
     private Button _spawnAssetsButton;
     private List<AsyncOperationHandle<GameObject>> _addressablePrefabs = new List<AsyncOperationHandle<GameObject>>();
+    #endregion
+    #region Life cycle
     private void Start()
     {
         _spawnAssetsButton.onClick.AddListener(CreateAddressablesPrefab);
@@ -28,20 +28,14 @@ public class LoadWindowView : MonoBehaviour
             Addressables.ReleaseInstance(addressablePrefab);
         _addressablePrefabs.Clear();
     }
-
     private async void CreateAddressablesPrefab()
     {
         var addressablePrefab = await Addressables.InstantiateAsync(_loadPrefab, _mountSpawnTransform).Task;
         if (addressablePrefab != null)
         {
-            //_addressablePrefabs.Add(addressablePrefab);
             addressablePrefab.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right);
         }
-
-
-
-
-
     }
+    #endregion
 }
 

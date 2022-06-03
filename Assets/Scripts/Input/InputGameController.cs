@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class InputGameController : BaseController
 {
+    #region Field
     private readonly InputType _inputType;
     private BaseInputView _view;
+    #endregion
+    #region Life cycle
     public InputGameController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, Car car, InputType inputType)
     {
         _inputType = inputType;
         _view = LoadView();
         _view.Init(leftMove, rightMove, car.Speed);
     }
-
     private ResourcePath GetPath(InputType inputType)
     {
         ResourcePath _viewPath;
@@ -36,9 +38,6 @@ public class InputGameController : BaseController
         }
         return _viewPath;
     }
-
-   
-
     private BaseInputView LoadView()
     {
         var objView = Object.Instantiate(ResourceLoader.LoadPrefab(GetPath(_inputType)));
@@ -46,5 +45,6 @@ public class InputGameController : BaseController
 
         return objView.GetComponent<BaseInputView>();
     }
+    #endregion
 }
 

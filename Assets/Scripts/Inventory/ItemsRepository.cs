@@ -2,8 +2,10 @@
 
 public class ItemsRepository : BaseController, IItemsRepository
 {
+    #region Fields
     public IReadOnlyDictionary<int, IItem> Items => _itemsMapById;
     private Dictionary<int, IItem> _itemsMapById = new Dictionary<int, IItem>();
+    #endregion
     #region Life cycle
     public ItemsRepository(
     List<UpgradeItemConfig> upgradeItemConfigs)

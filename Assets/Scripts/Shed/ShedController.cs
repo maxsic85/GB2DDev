@@ -15,7 +15,7 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private readonly IInventoryView _inventoryView;
     #region Life cycle
-    public ShedController([NotNull] UpgradeItemConfigDataSource upgradeItemConfigs,[NotNull] Car car,
+    public ShedController([NotNull] UpgradeItemConfigDataSource upgradeItemConfigs, [NotNull] Car car,
                           [NotNull] Transform placeForUi, InventoryModel inventoryModel)
     {
         _inventoryView = LoadView(placeForUi);
@@ -34,6 +34,33 @@ public class ShedController : BaseController, IShedController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);
     }
+    private void UpgradeCarWithEquippedItems(
+                                            IUpgradableCar upgradableCar,
+                                            IReadOnlyList<IItem> equippedItems,
+                                            IReadOnlyDictionary<int,
+                                            IUpgradeCarHandler> upgradeHandlers)
+    {
+        foreach (var equippedItem in equippedItems)
+        {
+            if (upgradeHandlers.TryGetValue(equippedItem.Id, out var handler))
+            {
+                if (equippedItem.Locked == false)
+                    handler.Upgrade(upgradableCar);
+            }
+        }
+    }
+    public IInventoryView LoadView(Transform placeForUi)
+    {
+        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
+        AddGameObjects(objectView);
+        return objectView.GetComponent<InventoryView>();
+    }
+    protected override void OnChildDispose()
+    {
+        base.OnChildDispose();
+    }
+    #endregion
+    #region IShedController
     public void EnterToShed()
     {
         _inventoryController.ShowInventory(ExitFromShed);
@@ -45,32 +72,6 @@ public class ShedController : BaseController, IShedController
         UpgradeCarWithEquippedItems(_car, equipItems, _upgradeHandlersRepository.UpgradeItems);
         Debug.Log($"Exit: car has speed : {_car.Speed}");
         _inventoryController.HideInventory();
-    }
-    private void UpgradeCarWithEquippedItems(
-                                            IUpgradableCar upgradableCar,
-                                            IReadOnlyList<IItem> equippedItems,
-                                            IReadOnlyDictionary<int,
-                                            IUpgradeCarHandler> upgradeHandlers)
-    {
-        foreach (var equippedItem in equippedItems)
-        {
-            if (upgradeHandlers.TryGetValue(equippedItem.Id, out var handler))
-            {
-                if(equippedItem.Locked==false)
-                handler.Upgrade(upgradableCar);
-            }
-        }
-    }
-    public IInventoryView LoadView(Transform placeForUi)
-    {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
-        AddGameObjects(objectView);
-        return objectView.GetComponent<InventoryView>();
-    }
-
-    protected override void OnChildDispose()
-    {
-        base.OnChildDispose();
     }
     #endregion
 }

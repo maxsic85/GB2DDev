@@ -12,12 +12,6 @@ namespace CarInput
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(Move);
         }
-
-        private void OnDestroy()
-        {
-            UpdateManager.UnsubscribeFromUpdate(Move);
-        }
-
         private void Move()
         {
             float moveStep = 10 * Time.deltaTime * CrossPlatformInputManager.GetAxis("Horizontal");
@@ -25,6 +19,10 @@ namespace CarInput
                 OnRightMove(moveStep);
             else if (moveStep < 0)
                 OnLeftMove(moveStep);
+        }
+        private void OnDestroy()
+        {
+            UpdateManager.UnsubscribeFromUpdate(Move);
         }
     }
 }

@@ -10,7 +10,6 @@ public class ShoperTest : MonoBehaviour
         _data.TryGetComponent<Root>(out Root root);
         root.ProfilePlayer.CurrenMoney.Value += grade;
     }
-
     public void GetBuyError()
     {
         Debug.Log($"error to buy {GetComponent<IAPButton>().productId}");

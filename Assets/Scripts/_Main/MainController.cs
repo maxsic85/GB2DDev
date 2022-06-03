@@ -58,14 +58,12 @@ public sealed class MainController : BaseController
         AddController(_shedController);
        
     }
-
     private CarInfoView LoadCarInfoView(Transform placeForUi)
     {
         var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(ResoursesPath._carviewPath), placeForUi, false);
         AddGameObjects(objectView);
         return objectView.GetComponent<CarInfoView>();
     }
-
     private void OnChangeGameState(GameState state)
     {
         switch (state)
@@ -115,7 +113,6 @@ public sealed class MainController : BaseController
         _startFightController?.Dispose();
 
     }
-
     protected override void OnChildDispose()
     {
         _mainMenuController?.Dispose();

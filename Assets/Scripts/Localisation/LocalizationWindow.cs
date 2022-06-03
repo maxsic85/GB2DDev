@@ -7,6 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 public class LocalizationWindow : MonoBehaviour
 {
+    #region Fields
     [SerializeField]
     private TMP_Text _changeText;
     [SerializeField]
@@ -15,6 +16,8 @@ public class LocalizationWindow : MonoBehaviour
     private Button _englishButton;
     [SerializeField]
     private Button _frenchButton;
+    #endregion
+    #region Life cycle
     private void Start()
     {
         ChangedLocaleEvent(null);
@@ -22,12 +25,6 @@ public class LocalizationWindow : MonoBehaviour
         _russianButton.onClick.AddListener(() => ChangeLanguage(2));
         _frenchButton.onClick.AddListener(() => ChangeLanguage(1));
         _englishButton.onClick.AddListener(() => ChangeLanguage(0));
-    }
-    private void OnDestroy()
-    {
-        _russianButton.onClick.RemoveAllListeners();
-        _frenchButton.onClick.RemoveAllListeners();
-        _englishButton.onClick.RemoveAllListeners();
     }
     private void ChangedLocaleEvent(Locale locale)
     {
@@ -54,4 +51,11 @@ public class LocalizationWindow : MonoBehaviour
         LocalizationSettings.SelectedLocale =
         LocalizationSettings.AvailableLocales.Locales[index];
     }
+    private void OnDestroy()
+    {
+        _russianButton.onClick.RemoveAllListeners();
+        _frenchButton.onClick.RemoveAllListeners();
+        _englishButton.onClick.RemoveAllListeners();
+    }
+    #endregion
 }

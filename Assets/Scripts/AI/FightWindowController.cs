@@ -4,19 +4,20 @@ using UnityEngine.AddressableAssets;
 
 public class FightWindowController : BaseController
 {
+    #region Field
     private FightWindowView _fightWindow;
     private ProfilePlayer _profilePlayer;
-
     private Money _money;
     private Health _heath;
     private Force _force;
     private Banditry _banditizm;
     private Enemy _enemy;
-
-    public FightWindowController(AssetReference fightWindow,Transform transformForUI, ProfilePlayer profilePlayer)
+    #endregion
+    #region Life cycle
+    public FightWindowController(AssetReference fightWindow, Transform transformForUI, ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
-        LoadView(fightWindow,transformForUI);
+        LoadView(fightWindow, transformForUI);
     }
 
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
@@ -26,7 +27,7 @@ public class FightWindowController : BaseController
         {
 
             _fightWindow = addressablePrefab.gameObject.GetComponent<FightWindowView>();
-              RefreshView();
+            RefreshView();
         }
     }
     public void RefreshView()
@@ -52,15 +53,10 @@ public class FightWindowController : BaseController
         _fightWindow.MinusPowerButton.onClick.AddListener(() => ChangePower(false));
         _fightWindow.AddPBanditizmButton.onClick.AddListener(() => ChangeBanditizm(true));
         _fightWindow.MinusBanditizmButton.onClick.AddListener(() => ChangeBanditizm(false));
-    
         _fightWindow.PassButton.onClick.AddListener(Pass);
         _fightWindow.FightButton.onClick.AddListener(Fight);
         _fightWindow.LeaveFightButton.onClick.AddListener(CloseWindow);
-
         _fightWindow.ShowPassButtonAction += OnShowPassButton;
-   
-
-
     }
     private void ChangeBanditizm(bool isAddCount)
     {
@@ -138,7 +134,6 @@ public class FightWindowController : BaseController
         _fightWindow.CountPowerEnemyText.text = $"Enemy Power {_enemy.Power}";
 
     }
-
     private void CloseWindow()
     {
         GameObject.Destroy(_fightWindow.gameObject);
@@ -163,5 +158,6 @@ public class FightWindowController : BaseController
         _banditizm.Detach(_enemy);
         base.OnChildDispose();
     }
+    #endregion
 }
 
