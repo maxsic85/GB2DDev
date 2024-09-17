@@ -4,22 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class DailyRewardController:BaseController
+public class DailyRewardController : BaseController
 {
+    #region Fields
     private DailyRewardView _dailyRewardView;
     private List<ContainerSlotRewardView> _slots;
     private CurrencyController _currencyController;
-
     private bool _isGetReward;
-    public DailyRewardController(AssetReference generateLevelView,Transform transformUi, AssetReference currencyView)
+    #endregion
+    #region Life cycle
+    public DailyRewardController(AssetReference generateLevelView, Transform transformUi, AssetReference currencyView)
     {
         LoadView(generateLevelView, transformUi);
-
-     //  _dailyRewardView = GameObject.Instantiate(generateLevelView, transformUi);
-        _currencyController = new CurrencyController(currencyView,transformUi);
+        _currencyController = new CurrencyController(currencyView, transformUi);
     }
-
-
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
     {
         var addressablePrefab = await Addressables.InstantiateAsync(loadPrefab, placeForUi).Task;
@@ -31,7 +29,6 @@ public class DailyRewardController:BaseController
 
         }
     }
-
     public void RefreshView()
     {
         InitSlots();
@@ -96,7 +93,6 @@ public class DailyRewardController:BaseController
                 _slots[i].SetData(_dailyRewardView.Rewards[i], i + 1, i == _dailyRewardView.CurrentSlotInActive);
         }
     }
-
     private void SubscribeButtons()
     {
         _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
@@ -133,7 +129,6 @@ public class DailyRewardController:BaseController
         GameObject.Destroy(_dailyRewardView.gameObject);
         _currencyController.CloseWindow();
     }
-
     protected override void OnChildDispose()
     {
         _dailyRewardView.GetRewardButton.onClick.RemoveAllListeners();
@@ -142,5 +137,6 @@ public class DailyRewardController:BaseController
 
         base.OnChildDispose();
     }
+    #endregion
 }
 

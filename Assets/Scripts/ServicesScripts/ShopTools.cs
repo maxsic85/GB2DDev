@@ -6,11 +6,14 @@ namespace Profile.Shop
 {
     internal class ShopTools : IShop, IStoreListener
     {
+        #region Fields
         private IStoreController _controller;
         private IExtensionProvider _extensionProvider;
         private bool _isInitialized;
         private readonly SubscriptionAction _onSuccessPurchase;
         private readonly SubscriptionAction _onFailedPurchase;
+        #endregion
+        #region Life cycle
         public ShopTools(List<ShopProduct> products)
         {
             _onSuccessPurchase = new SubscriptionAction();
@@ -22,19 +25,7 @@ namespace Profile.Shop
                 builder.AddProduct(product.Id, product.CurrentProductType);
             }
         }
-        public IReadOnlySubscriptionAction OnSuccessPurchase =>
-        _onSuccessPurchase;
-        public IReadOnlySubscriptionAction OnFailedPurchase => _onFailedPurchase;
-        public void Buy(string id)
-        {
-            if (!_isInitialized)
-                return;
-            _controller.InitiatePurchase(id);
-        }
-        public void OnInitializeFailed(InitializationFailureReason error)
-        {
-            _isInitialized = false;
-        }
+        #region IStoreListener
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs
         purchaseEvent)
         {
@@ -52,6 +43,21 @@ namespace Profile.Shop
             _controller = controller;
             _extensionProvider = extensions;
             _isInitialized = true;
+        }
+        public void OnInitializeFailed(InitializationFailureReason error)
+        {
+            _isInitialized = false;
+        }
+        private void OnRestoreFinished(bool isSuccess)
+        {
+        }
+        #endregion
+        #region IShop
+        public void Buy(string id)
+        {
+            if (!_isInitialized)
+                return;
+            _controller.InitiatePurchase(id);
         }
         public string GetCost(string productID)
         {
@@ -73,8 +79,10 @@ eTransactionFinished);
             _extensionProvider.GetExtension<IGooglePlayStoreExtensions>().RestoreTransactions(OnRestoreFinished);
 #endif
         }
-        private void OnRestoreFinished(bool isSuccess)
-        {
-        }
+        public IReadOnlySubscriptionAction OnSuccessPurchase =>
+        _onSuccessPurchase;
+        public IReadOnlySubscriptionAction OnFailedPurchase => _onFailedPurchase;
+        #endregion
     }
+    #endregion
 }

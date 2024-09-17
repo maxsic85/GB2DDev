@@ -4,9 +4,9 @@
     private readonly float _speed;
     #endregion
     #region Life cycle
-    public SpeedUpgradeCarHandler(float speed)
+    public SpeedUpgradeCarHandler(float power)
     {
-        _speed = speed;
+        _speed = power;
     }
     #endregion
     #region IUpgradeHandler

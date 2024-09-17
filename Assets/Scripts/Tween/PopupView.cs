@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PopupView : MonoBehaviour
 {
+    #region Fields
     [SerializeField]
     private Button _buttonClosePopup;
     [SerializeField]
     private float _duration = 0.3f;
+    #endregion
+    #region Life cycle
     private void Start()
     {
         _buttonClosePopup.onClick.AddListener(HidePopup);
-    }
-    private void OnDestroy()
-    {
-        _buttonClosePopup.onClick.RemoveAllListeners();
     }
     public void ShowPopup()
     {
@@ -31,7 +30,7 @@ public class PopupView : MonoBehaviour
         sequence.Insert(0.0f, transform.DOScale(Vector3.one, _duration));
         sequence.OnComplete(() =>
         {
-        sequence = null;
+            sequence = null;
         });
     }
     private void AnimationHide()
@@ -44,5 +43,10 @@ public class PopupView : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+    private void OnDestroy()
+    {
+        _buttonClosePopup.onClick.RemoveAllListeners();
+    }
+    #endregion
 }
 

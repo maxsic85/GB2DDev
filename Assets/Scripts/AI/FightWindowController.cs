@@ -4,20 +4,20 @@ using UnityEngine.AddressableAssets;
 
 public class FightWindowController : BaseController
 {
+    #region Field
     private FightWindowView _fightWindow;
     private ProfilePlayer _profilePlayer;
-
     private Money _money;
     private Health _heath;
     private Force _force;
-    private Banditizm _banditizm;
+    private Banditry _banditizm;
     private Enemy _enemy;
-
-    public FightWindowController(AssetReference fightWindow,Transform transformForUI, ProfilePlayer profilePlayer)
+    #endregion
+    #region Life cycle
+    public FightWindowController(AssetReference fightWindow, Transform transformForUI, ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
-        LoadView(fightWindow,transformForUI);
-     //   _fightWindow = GameObject.Instantiate(fightWindow, transformForUI);
+        LoadView(fightWindow, transformForUI);
     }
 
     private async void LoadView(AssetReference loadPrefab, Transform placeForUi)
@@ -28,9 +28,6 @@ public class FightWindowController : BaseController
 
             _fightWindow = addressablePrefab.gameObject.GetComponent<FightWindowView>();
             RefreshView();
-          
-
-
         }
     }
     public void RefreshView()
@@ -42,7 +39,7 @@ public class FightWindowController : BaseController
         _heath.Attach(_enemy);
         _force = _profilePlayer.PlayerForce;
         _force.Attach(_enemy);
-        _banditizm = _profilePlayer.PlayerBanditizm;
+        _banditizm = _profilePlayer.PlayerBandetry;
         _banditizm.Attach(_enemy);
         SubscribeButtons();
     }
@@ -53,59 +50,58 @@ public class FightWindowController : BaseController
         _fightWindow.AddHealthButton.onClick.AddListener(() => ChangeHealth(true));
         _fightWindow.MinusHealthButton.onClick.AddListener(() => ChangeHealth(false));
         _fightWindow.AddPowerButton.onClick.AddListener(() => ChangePower(true));
-        _fightWindow.MinusPowerButton.onClick.AddListener(() =>ChangeBanditizm(false));
+        _fightWindow.MinusPowerButton.onClick.AddListener(() => ChangePower(false));
         _fightWindow.AddPBanditizmButton.onClick.AddListener(() => ChangeBanditizm(true));
         _fightWindow.MinusBanditizmButton.onClick.AddListener(() => ChangeBanditizm(false));
-    
         _fightWindow.PassButton.onClick.AddListener(Pass);
         _fightWindow.FightButton.onClick.AddListener(Fight);
         _fightWindow.LeaveFightButton.onClick.AddListener(CloseWindow);
-
         _fightWindow.ShowPassButtonAction += OnShowPassButton;
-   
-
-
     }
     private void ChangeBanditizm(bool isAddCount)
     {
         if (isAddCount)
         {
-            _profilePlayer.PlayerBanditizm.Banditizm++;
-            if (_profilePlayer.PlayerBanditizm.Banditizm > 2) _fightWindow.ShowPassButtonAction?.Invoke();
+            _profilePlayer.CurrentCar.CurrenBandetry.Value++;
+            if (_profilePlayer.CurrentCar.CurrenBandetry.Value > 2) _fightWindow.ShowPassButtonAction?.Invoke();
         }
         else
         {
-            _profilePlayer.PlayerBanditizm.Banditizm--;
+            _profilePlayer.PlayerBandetry.Bandentry--;
         }
-        ChangeDataWindow(_profilePlayer.PlayerBanditizm.Banditizm, DataType.Banditizm);
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenBandetry.Value, DataType.Banditizm);
     }
     private void ChangeMoney(bool isAddCount)
     {
         if (isAddCount)
-            _profilePlayer.PlayerMoney.Money++;
+        {
+            _profilePlayer.CurrenMoney.Value++;
+        }
         else
-            _profilePlayer.PlayerMoney.Money--;
-        ChangeDataWindow(_profilePlayer.PlayerMoney.Money, DataType.Money);
+        {
+            _profilePlayer.CurrenMoney.Value--;
+        }
+        ChangeDataWindow(_profilePlayer.CurrenMoney.Value, DataType.Money);
     }
     private void ChangeHealth(bool isAddCount)
     {
         if (isAddCount)
-            _profilePlayer.PlayerHealth.Health++;
+            _profilePlayer.CurrentCar.CurrenHealth.Value++;
         else
-            _profilePlayer.PlayerHealth.Health--;
-        ChangeDataWindow(_profilePlayer.PlayerHealth.Health, DataType.Health);
+            _profilePlayer.CurrentCar.CurrenHealth.Value--;
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenHealth.Value, DataType.Health);
     }
     private void ChangePower(bool isAddCount)
     {
         if (isAddCount)
-            _profilePlayer.PlayerForce.Power++;
+            _profilePlayer.CurrentCar.CurrenPower.Value++;
         else
-            _profilePlayer.PlayerForce.Power--;
-        ChangeDataWindow(_profilePlayer.PlayerForce.Power, DataType.Power);
+            _profilePlayer.CurrentCar.CurrenPower.Value--;
+        ChangeDataWindow(_profilePlayer.CurrentCar.CurrenPower.Value, DataType.Power);
     }
     private void Fight()
     {
-        Debug.Log(_profilePlayer.PlayerForce.Power >= _enemy.Power
+        Debug.Log(_profilePlayer.CurrentCar.CurrenPower.Value >= _enemy.Power
         ? "<color=#07FF00>Win!!!</color>"
         : "<color=#FF0000>Lose!!!</color>");
     }
@@ -123,25 +119,21 @@ public class FightWindowController : BaseController
         switch (dataType)
         {
             case DataType.Money:
-                _fightWindow.CountMoneyText.text = $"Player Money {countChangeData.ToString()}";
                 _money.Money = countChangeData;
                 break;
             case DataType.Health:
-                _fightWindow.CountHealthText.text = $"Player Health {countChangeData.ToString()}";
                 _heath.Health = countChangeData;
                 break;
             case DataType.Power:
-                _fightWindow.CountPowerText.text = $"Player Power {countChangeData.ToString()}";
                 _force.Power = countChangeData;
                 break;
             case DataType.Banditizm:
-                _fightWindow.CountBanditizmPlayerText.text = $"Player Banditizmo {countChangeData.ToString()}";
-                _banditizm.Banditizm = countChangeData;
+                _banditizm.Bandentry = countChangeData;
                 break;
         }
         _fightWindow.CountPowerEnemyText.text = $"Enemy Power {_enemy.Power}";
-    }
 
+    }
     private void CloseWindow()
     {
         GameObject.Destroy(_fightWindow.gameObject);
@@ -166,5 +158,6 @@ public class FightWindowController : BaseController
         _banditizm.Detach(_enemy);
         base.OnChildDispose();
     }
+    #endregion
 }
 

@@ -2,10 +2,10 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 
 public class CustomButton : Button
 {
+    #region Fields
     public static string ChangeButtonType => nameof(_animationButtonType);
     public static string CurveEase => nameof(_curveEase);
     public static string Duration => nameof(_duration);
@@ -19,6 +19,8 @@ public class CustomButton : Button
     private float _strength = 30.0f;
     private RectTransform _rectTransform;
     private AudioSource _audioSource;
+    #endregion
+    #region Life cycle
     protected override void Awake()
     {
         base.Awake();
@@ -31,12 +33,10 @@ public class CustomButton : Button
         ActivateAnimation(_animationButtonType);
         ActivateSound();
     }
-
     private void ActivateSound()
     {
         _audioSource.Play();
     }
-
     private void ActivateAnimation(AnimationButtonType animationButtonType)
     {
         switch (animationButtonType)
@@ -51,10 +51,11 @@ public class CustomButton : Button
                 break;
 
             case AnimationButtonType.ChangeScale:
-                _rectTransform.DOScaleX(_duration,1.0f).SetEase(_curveEase);
+                _rectTransform.DOScaleX(_duration, 1.0f).SetEase(_curveEase);
                 break;
         }
     }
+    #endregion
 }
 
 

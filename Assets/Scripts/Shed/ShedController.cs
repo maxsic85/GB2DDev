@@ -15,7 +15,7 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private readonly IInventoryView _inventoryView;
     #region Life cycle
-    public ShedController([NotNull] List<UpgradeItemConfig> upgradeItemConfigs,[NotNull] Car car,
+    public ShedController([NotNull] UpgradeItemConfigDataSource upgradeItemConfigs, [NotNull] Car car,
                           [NotNull] Transform placeForUi, InventoryModel inventoryModel)
     {
         _inventoryView = LoadView(placeForUi);
@@ -26,25 +26,13 @@ public class ShedController : BaseController, IShedController
         = new UpgradeHandlersRepository(upgradeItemConfigs);
         AddController(_upgradeHandlersRepository);
         _upgradeItemsRepository
-        = new ItemsRepository(upgradeItemConfigs.Select(value =>
-        value.itemConfig).ToList());
+        = new ItemsRepository(upgradeItemConfigs.itemConfigs.Select(value =>
+        value).ToList());
         AddController(_upgradeItemsRepository);
         _inventoryModel = inventoryModel;
         _inventoryController
         = new InventoryController(_inventoryModel, _upgradeItemsRepository, _inventoryView);
         AddController(_inventoryController);
-    }
-    public void EnterToShed()
-    {
-        _inventoryController.ShowInventory(ExitFromShed);
-    }
-    public void ExitFromShed()
-    {
-        Debug.Log($"Exit: car has speed : {_car.Speed}");
-        var equipItems = _upgradeItemsRepository.Items.Values.ToList();
-        UpgradeCarWithEquippedItems(_car, equipItems, _upgradeHandlersRepository.UpgradeItems);
-        Debug.Log($"Exit: car has speed : {_car.Speed}");
-        _inventoryController.HideInventory();
     }
     private void UpgradeCarWithEquippedItems(
                                             IUpgradableCar upgradableCar,
@@ -56,7 +44,8 @@ public class ShedController : BaseController, IShedController
         {
             if (upgradeHandlers.TryGetValue(equippedItem.Id, out var handler))
             {
-                handler.Upgrade(upgradableCar);
+                if (equippedItem.Locked == false)
+                    handler.Upgrade(upgradableCar);
             }
         }
     }
@@ -66,10 +55,23 @@ public class ShedController : BaseController, IShedController
         AddGameObjects(objectView);
         return objectView.GetComponent<InventoryView>();
     }
-
     protected override void OnChildDispose()
     {
         base.OnChildDispose();
+    }
+    #endregion
+    #region IShedController
+    public void EnterToShed()
+    {
+        _inventoryController.ShowInventory(ExitFromShed);
+        Debug.Log($"Enter: car has speed : {_car.Speed}");
+    }
+    public void ExitFromShed()
+    {
+        var equipItems = _upgradeItemsRepository.Items.Values.ToList();
+        UpgradeCarWithEquippedItems(_car, equipItems, _upgradeHandlersRepository.UpgradeItems);
+        Debug.Log($"Exit: car has speed : {_car.Speed}");
+        _inventoryController.HideInventory();
     }
     #endregion
 }

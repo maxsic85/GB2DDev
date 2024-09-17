@@ -29,7 +29,6 @@ public class DailyRewardView : MonoBehaviour
     private Button _resetButton;
     [SerializeField]
     private Button _closeButton;
-
     public float TimeCooldown => _timeCooldown;
     public float TimeDeadline => _timeDeadline;
     public List<Reward> Rewards => _rewards;
@@ -39,7 +38,6 @@ public class DailyRewardView : MonoBehaviour
     public Button GetRewardButton => _getRewardButton;
     public Button ResetButton => _resetButton;
     public Button ClosseButton => _closeButton;
-
     public int CurrentSlotInActive
     {
         get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);

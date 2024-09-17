@@ -3,10 +3,11 @@ using System.Collections.Generic;
 public abstract class DataPlayer
 {
     private string _titleData;
-    private int _countMoney;
-    private int _countHealth;
-    private int _countPower;
-    private int _banditizm;
+    private int _countMoney = 0;
+    private float _countSpeed = 3f;
+    private int _countHealth = 10;
+    private int _countPower = 5;
+    private int _banditizm = 1;
 
     private List<IEnemy> _enemies = new List<IEnemy>();
     protected DataPlayer(string titleData)
@@ -39,6 +40,18 @@ public abstract class DataPlayer
             }
         }
     }
+    public float Speed
+    {
+        get => _countSpeed;
+        set
+        {
+            if (_countSpeed != value)
+            {
+                _countSpeed = value;
+                Notify(DataType.Money);
+            }
+        }
+    }
     public int Health
     {
         get => _countHealth;
@@ -63,8 +76,7 @@ public abstract class DataPlayer
             }
         }
     }
-
-    public int Banditizm
+    public int Bandentry
     {
         get => _banditizm;
         set

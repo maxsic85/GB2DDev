@@ -1,10 +1,12 @@
 
 using UnityEngine;
-[CreateAssetMenu(fileName ="UpdrateItem", menuName = "ItemMenu/ConfigItem", order =1)]
+[CreateAssetMenu(fileName = "UpdrateItem", menuName = "ItemMenu/ConfigItem", order = 1)]
 public class UpgradeItemConfig : ScriptableObject
 {
     public ItemConfig itemConfig;
-    public UpgradeType type;
-    public float value;
+    [SerializeField] private UpgradeType type;
+    public int value;
+    public int price;
     public int Id => itemConfig.id;
+    public UpgradeType UpgrtType => type;
 }

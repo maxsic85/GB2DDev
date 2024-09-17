@@ -2,11 +2,13 @@
 
 public class ItemsRepository : BaseController, IItemsRepository
 {
+    #region Fields
     public IReadOnlyDictionary<int, IItem> Items => _itemsMapById;
     private Dictionary<int, IItem> _itemsMapById = new Dictionary<int, IItem>();
+    #endregion
     #region Life cycle
     public ItemsRepository(
-    List<ItemConfig> upgradeItemConfigs)
+    List<UpgradeItemConfig> upgradeItemConfigs)
     {
         PopulateItems(ref _itemsMapById, upgradeItemConfigs);
     }
@@ -19,20 +21,21 @@ public class ItemsRepository : BaseController, IItemsRepository
     #region Methods
     private void PopulateItems(
     ref Dictionary<int, IItem> upgradeHandlersMapByType,
-    List<ItemConfig> configs)
+    List<UpgradeItemConfig> configs)
     {
         foreach (var config in configs)
         {
-            if (upgradeHandlersMapByType.ContainsKey(config.id)) continue;
-            upgradeHandlersMapByType.Add(config.id, CreateItem(config));
+            if (upgradeHandlersMapByType.ContainsKey(config.itemConfig.id)) continue;
+            upgradeHandlersMapByType.Add(config.itemConfig.id, CreateItem(config));
         }
     }
-    private IItem CreateItem(ItemConfig config)
+    private IItem CreateItem(UpgradeItemConfig config)
     {
         return new Item
         {
-            Id = config.id,
-            Info = new ItemInfo { Title = config.title, Sprite=config.image }
+            Id = config.itemConfig.id,
+            Locked=true,
+            Info = new ItemInfo { Title = config.itemConfig.title,Value=config.value,Price=config.price, Sprite=config.itemConfig.image, UpgradeType=config.UpgrtType }
         };
     }
 #endregion

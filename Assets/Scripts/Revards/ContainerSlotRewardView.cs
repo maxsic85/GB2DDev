@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ContainerSlotRewardView : MonoBehaviour
 {
+    #region Fields
     [SerializeField]
     private Image _selectBackground;
     [SerializeField]
@@ -12,6 +13,8 @@ public class ContainerSlotRewardView : MonoBehaviour
     private TMP_Text _textDays;
     [SerializeField]
     private TMP_Text _countReward;
+    #endregion
+    #region Life cycle
     public void SetData(Reward reward, int countDay, bool isSelect)
     {
         _iconCurrency.sprite = reward.IconCurrency;
@@ -19,4 +22,5 @@ public class ContainerSlotRewardView : MonoBehaviour
         _countReward.text = reward.CountCurrency.ToString();
         _selectBackground.gameObject.SetActive(isSelect);
     }
+    #endregion
 }

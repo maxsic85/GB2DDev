@@ -2,4 +2,6 @@
 {
     None,
     Speed,
+    Power,
+    Bandetry
 }

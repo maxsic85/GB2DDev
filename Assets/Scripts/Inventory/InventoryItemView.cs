@@ -25,5 +25,4 @@ public class InventoryItemView : MonoBehaviour
         OnClick = null;
         button.onClick.RemoveAllListeners();
     }
-
 }
